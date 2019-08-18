@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/public/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+    <title>Inscription</title>
+</head>
+
+<body id="inscription">
+
+<h1 th:text="#{register.form.title}">form</h1>
+<form th:action="@{'/register'}" th:object="${user}" method="POST" enctype="utf8">
+    <div>
+        <label th:text="#{register.form.label.username}">username</label>
+        <input th:field="*{username}"/>
+        <p th:each="error: ${#fields.errors('username')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label th:text="#{register.form.label.email}">email</label>
+        <input type="email" th:field="*{email}"/>
+        <p th:each="error : ${#fields.errors('email')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label th:text="#{register.form.label.birthDate}">birthDate</label>
+        <input th:field="*{birthDate}"/>
+        <p th:each="error : ${#fields.errors('birthDate')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label th:text="#{register.form.label.password}">password</label>
+        <input type="password" th:field="*{password}"/>
+        <p th:each="error : ${#fields.errors('password')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label th:text="#{register.form.label.confirmPass}">confirm</label>
+        <input type="password" th:field="*{matchingPassword}"/>
+    </div>
+    <button type="submit" th:text="#{register.form.submit}">submit</button>
+</form>
+
+<a th:href="@{'/login'}" th:text="#{register.form.loginLink}">login</a>
+
+</body>

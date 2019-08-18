@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="menu" id="main_menu">
+    <div id="mm_logo">
+        <a th:href="@{'/index'}"><img th:src="@{'/images/logo/logo.png'}" alt="logo"></a>
+    </div>
+    <ul id="mm_header_button">
+        <li class="inline_li" id="mm_language">
+            <a id="mm_language_button" onclick='openLanguageMenu()' title="Français">FR</a>
+            <nav id="mm_language_menu" class="mm_language_menu_elements">
+                <ul>
+                    <li><a th:href="@{'/changeLanguage?lg=fr'}" title="Français">FR</a></li>
+                    <li><a th:href="@{'/changeLanguage?lg=en'}" title="English">EN</a></li>
+                </ul>
+            </nav>
+        </li>
+        <li class="inline_li" id="mm_search_button"><a th:href="@{#}"><i class="fa fa-search"></i></a></li>
+    </ul>
+    <ul id="mm_connection_button">
+        <th:block th:if="${session.user == null}">
+            <li><a th:href="@{'/login'}" th:text="#{menu.login}">login</a></li>
+        </th:block>
+        <th:block th:unless="${session.user == null}">
+            <li><a th:href="@{'/logout'}" th:text="#{menu.logout}">logout</a></li>
+            <li><a th:href="@{'/profile'}"><i class="fa fa-user"></i></a></li>
+        </th:block>
+    </ul>
+    <div id="mm_center_menu">
+        <ul id="mm_center_menu_nav">
+            <li><a th:href="@{'/univers'}" th:text="#{menu.universe}">universe</a></li>
+            <li><a th:href="@{'/news'}" th:text="#{menu.news}">news</a></li>
+            <li><a th:href="@{'/wiki'}" th:text="#{menu.wiki}">wiki</a></li>
+            <li><a href="#" th:text="#{menu.community}">community</a></li>
+            <li><a href="#" th:text="#{menu.shop}">shop</a></li>
+            <li><a href="#" th:text="#{menu.support}">support</a></li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    function openLanguageMenu() {
+        document.getElementById("mm_language_menu").classList.toggle("show");
+    }
+
+    window.onclick = function (event) {
+        if (!event.target.matches('#mm_language_button')) {
+            var dropdown = document.getElementsByClassName("mm_language_menu_elements");
+            var i;
+            for (i = 0; i < dropdown.length; i++) {
+                var openDropdown = dropdown[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
