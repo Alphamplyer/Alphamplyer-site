@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface INewsRepository {
 
-    News getById(Integer id);
+    News getById(Integer id, Boolean includeNotPublished);
 
-    List<News> getNews(Integer offset, Integer limit);
+    List<News> getNews(Integer offset, Integer limit, Boolean includeNotPublished);
 
-    List<News> getNewsByCategoryId(Integer categoryId, Integer offset, Integer limit);
+    List<News> getNewsByCategoryId(Integer categoryId, Integer offset, Integer limit, Boolean includeNotPublished);
 
-    List<News> getNewsByAuthorId(Integer authorId, Integer offset, Integer limit);
+    List<News> getNewsByAuthorId(Integer authorId, Integer offset, Integer limit, Boolean includeNotPublished);
 
     News save(News news);
 

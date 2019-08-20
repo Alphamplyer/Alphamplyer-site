@@ -27,4 +27,11 @@ public class DAORepository {
 
         return sql.trim();
     }
+
+    protected String buildSQLCondition(Boolean active, String sqlToAdd) {
+        if (active != null && active)
+            return sqlToAdd;
+        else
+            return "";
+    }
 }

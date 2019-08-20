@@ -18,8 +18,9 @@ import java.util.List;
 public class NewsRepository extends DAORepository implements INewsRepository {
 
     @Override
-    public News getById(Integer id) {
-        String sql = "SELECT * FROM news WHERE id = :id";
+    public News getById(Integer id, Boolean includeNotPublished) {
+        String sql = "SELECT * FROM news WHERE id = :id"
+            + buildSQLCondition(includeNotPublished, " AND publication_date < NOW()");
 
         RowMapper<News> rowMapper = new NewsRowMapper();
 
@@ -38,8 +39,10 @@ public class NewsRepository extends DAORepository implements INewsRepository {
     }
 
     @Override
-    public List<News> getNews(Integer offset, Integer limit) {
-        String sql = "SELECT * FROM news " + buildSQLOffsetLimit(offset, limit);
+    public List<News> getNews(Integer offset, Integer limit, Boolean includeNotPublished) {
+        String sql = "SELECT * FROM news "
+            + buildSQLCondition(includeNotPublished, "WHERE publication_date < NOW()")
+            + buildSQLOffsetLimit(offset, limit);
 
         RowMapper<News> rowMapper = new NewsRowMapper();
 
@@ -52,8 +55,10 @@ public class NewsRepository extends DAORepository implements INewsRepository {
     }
 
     @Override
-    public List<News> getNewsByCategoryId(Integer categoryId, Integer offset, Integer limit) {
-        String sql = "SELECT * FROM news WHERE category_id = :category_id " + buildSQLOffsetLimit(offset, limit);
+    public List<News> getNewsByCategoryId(Integer categoryId, Integer offset, Integer limit, Boolean includeNotPublished) {
+        String sql = "SELECT * FROM news WHERE category_id = :category_id "
+            + buildSQLCondition(includeNotPublished, " AND publication_date < NOW()")
+            + buildSQLOffsetLimit(offset, limit);
 
         RowMapper<News> rowMapper = new NewsRowMapper();
 
@@ -69,8 +74,10 @@ public class NewsRepository extends DAORepository implements INewsRepository {
     }
 
     @Override
-    public List<News> getNewsByAuthorId(Integer authorId, Integer offset, Integer limit) {
-        String sql = "SELECT n.* FROM news n, news_authors na WHERE na.news_id = n.id AND na.author_id = :authorId " + buildSQLOffsetLimit(offset, limit);
+    public List<News> getNewsByAuthorId(Integer authorId, Integer offset, Integer limit, Boolean includeNotPublished) {
+        String sql = "SELECT n.* FROM news n, news_authors na WHERE na.news_id = n.id AND na.author_id = :authorId "
+            + buildSQLCondition(includeNotPublished, " AND publication_date < NOW()")
+            + buildSQLOffsetLimit(offset, limit);
 
         RowMapper<News> rowMapper = new NewsRowMapper();
 

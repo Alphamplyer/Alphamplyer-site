@@ -40,11 +40,12 @@ public class NewsController {
     //region // --- < GET MAPPING > -------------------------------------------------------------------------------//
 
     @GetMapping(value = "/news/{id}")
-    public ResponseEntity<News> getNewsByID(@PathVariable(name = "id") Integer id) {
+    public ResponseEntity<News> getNewsByID(@PathVariable(name = "id") Integer id,
+                                            @RequestParam(name = "includePublished", required = false) Boolean includePublished) {
         News news;
 
         try {
-            news = newsRepository.getById(id);
+            news = newsRepository.getById(id, includePublished);
         } catch (DataAccessException e) {
             logger.error("News not found", e);
             news = null;
@@ -59,11 +60,12 @@ public class NewsController {
 
     @GetMapping(value = "/news")
     public ResponseEntity<List<News>> getNews(@RequestParam(name = "offset", required = false) Integer offset,
-                                              @RequestParam(name = "limit", required = false) Integer limit) {
+                                              @RequestParam(name = "limit", required = false) Integer limit,
+                                              @RequestParam(name = "includePublished", required = false) Boolean includePublished) {
         List<News> news;
 
         try {
-            news = newsRepository.getNews(offset, limit);
+            news = newsRepository.getNews(offset, limit, includePublished);
         } catch (DataAccessException e) {
             logger.error("News not found", e);
             news = null;
@@ -79,11 +81,12 @@ public class NewsController {
     @GetMapping(value = "/newsCategory/{id}/news")
     public ResponseEntity<List<News>> getNewsOfCategory(@PathVariable(name = "id") Integer id,
                                                         @RequestParam(name = "offset", required = false) Integer offset,
-                                                        @RequestParam(name = "limit", required = false) Integer limit) {
+                                                        @RequestParam(name = "limit", required = false) Integer limit,
+                                                        @RequestParam(name = "includePublished", required = false) Boolean includePublished) {
         List<News> news;
 
         try {
-            news = newsRepository.getNewsByCategoryId(id, offset, limit);
+            news = newsRepository.getNewsByCategoryId(id, offset, limit, includePublished);
         } catch (DataAccessException e) {
             logger.error("News not found in category", e);
             news = null;
@@ -99,11 +102,12 @@ public class NewsController {
     @GetMapping(value = "/news/author/{id}")
     public ResponseEntity<List<News>> getNewsOfAuthor(@PathVariable(name = "id") Integer id,
                                                       @RequestParam(name = "offset", required = false) Integer offset,
-                                                      @RequestParam(name = "limit", required = false) Integer limit) {
+                                                      @RequestParam(name = "limit", required = false) Integer limit,
+                                                      @RequestParam(name = "includePublished", required = false) Boolean includePublished) {
         List<News> news;
 
         try {
-            news = newsRepository.getNewsByAuthorId(id, offset, limit);
+            news = newsRepository.getNewsByAuthorId(id, offset, limit, includePublished);
         } catch (DataAccessException e) {
             logger.error("News not found in author's written news", e);
             news = null;
