@@ -1,0 +1,54 @@
+// --- < VARIABLES > ---------------------------------------- //
+
+// --- < IMPORT > ------------------------------------------- //
+
+@import "base/base_imports";
+
+@import "modules/menu";
+@import "modules/news";
+@import "modules/search-box";
+
+// --- < SCSS > --------------------------------------------- //
+
+
+header {
+    height: $menu_height + 100px;
+}
+
+.news-container {
+    display: grid;
+    padding: 20px;
+    grid-template-columns: auto 900px 20px 400px auto;
+
+    .news-section {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        place-self: start end;
+        width: 70%;
+        min-width: 700px;
+    }
+
+    aside {
+        width: 400px;
+        grid-column-start: 4;
+        grid-column-end: 5;
+        @include border-radius(5px);
+        background-color: $color_news-background;
+        place-self: start start;
+
+        .filters {
+            width: 100%;
+            padding: 15px;
+        }
+
+        .searchBox {
+            margin-top: 20px;
+        }
+    }
+}
+
+@media screen and (max-width: 1380px) {
+    .news-container {
+        grid-template-columns: auto 700px 20px 400px auto;
+    }
+}
