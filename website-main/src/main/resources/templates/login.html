@@ -5,39 +5,27 @@
     <meta charset="ISO-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" th:href="@{/public/css/style.css}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/css/login_register.css}">
+    <script src="https://kit.fontawesome.com/6bdf0d0706.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
-    <title>Connexion</title>
+    <title>Accueil</title>
 </head>
 
 <body id="connection">
-
-<h1 th:text="#{login.form.title}">form</h1>
-<form th:action="@{'/login'}" th:object="${login}" method="POST" enctype="utf8">
-
-    <div>
-        <label th:text="#{login.form.label.identifier}">identifier</label>
-        <input th:field="*{identifier}"/>
-        <p th:each="error: ${#fields.errors('identifier')}"
-           th:text="${error}">Validation error</p>
+    <div class="l-container">
+        <div id="form-container">
+            <form th:action="@{/login}" method="get">
+                <fieldset class="clearfix">
+                    <p><span class="fas fa-user"></span><input type="text" id="identifier" name="identifier" placeholder="Username"></p>
+                    <label for="identifier"></label>
+                    <p><span class="fas fa-lock"></span><input type="password" id="password" name="password" placeholder="Password"></p>
+                    <label for="password"></label>
+                    <p><input type="submit" value="Sign In"></p>
+                </fieldset>
+            </form>
+            <p>Not a member? <a th:href="@{/register}">Sign up now</a><span class="fas fa-arrow-circle-right"></span></p>
+        </div>
     </div>
-
-    <div>
-        <label th:text="#{login.form.label.password}">password</label>
-        <input type="password" th:field="*{password}"/>
-        <p th:each="error : ${#fields.errors('password')}"
-           th:text="${error}">Validation error</p>
-    </div>
-
-    <div>
-        <input type="checkbox" th:field="*{rememberMe}" id="rmbrMe"><label for="rmbrMe" th:text="#{login.form.rememberMe}"></label>
-    </div>
-
-    <button type="submit" th:text="#{login.form.submit}">submit</button>
-</form>
-
-<a th:href="@{'/register'}" th:text="#{login.form.registerLink}">register</a>
 
 </body>
 

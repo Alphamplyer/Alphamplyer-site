@@ -8,16 +8,17 @@ $searchbar-height: 40px;
     height: $searchbar-height;
     @include border-radius($searchbar-height);
     padding: 5px;
-    background: #2f3640;
+    background: #222;
 }
 
-.searchBox:hover > .searchButton {
+.searchButton:hover {
     background: white;
     color : #bababa;
 }
 
 .searchButton {
     color: white;
+    border:none;
     float: right;
     width: $searchbar-height - 10px;
     height: $searchbar-height - 10px;
@@ -26,7 +27,7 @@ $searchbar-height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    @include transition(all, 0.4s)
+    @include transition(all, 0.2s)
 }
 
 .searchInput {
@@ -39,6 +40,6 @@ $searchbar-height: 40px;
     color: white;
     font-size: 16px;
     transition: 0.4s;
-    line-height: $searchbar-height - 10px;
+    line-height: $searchbar-height - 9px;
 
 }
