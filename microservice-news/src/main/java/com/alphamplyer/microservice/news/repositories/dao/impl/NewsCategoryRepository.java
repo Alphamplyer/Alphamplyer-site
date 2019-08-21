@@ -60,7 +60,7 @@ public class NewsCategoryRepository extends DAORepository implements INewsCatego
 
     @Override
     public List<NewsCategory> getChild(Integer id) {
-        String sql = "SELECT * FROM news_categories WHERE parent_id IS NOT NULL AND parent_id = :id";
+        String sql = "SELECT * FROM news_categories WHERE parent_id = :id";
 
         RowMapper<NewsCategory> rowMapper = new NewsCategoryRowMapper();
 
@@ -68,6 +68,20 @@ public class NewsCategoryRepository extends DAORepository implements INewsCatego
         params.addValue("id", id);
 
         List<NewsCategory> news = namedParameterJdbcTemplate.query(sql, params, rowMapper);
+
+        if (news.isEmpty())
+            return null;
+
+        return news;
+    }
+
+    @Override
+    public List<NewsCategory> getMainCategories() {
+        String sql = "SELECT * FROM news_categories WHERE parent_id IS NULL";
+
+        RowMapper<NewsCategory> rowMapper = new NewsCategoryRowMapper();
+
+        List<NewsCategory> news = jdbcTemplate.query(sql, rowMapper);
 
         if (news.isEmpty())
             return null;

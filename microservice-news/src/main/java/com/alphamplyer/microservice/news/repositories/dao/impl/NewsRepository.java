@@ -20,7 +20,7 @@ public class NewsRepository extends DAORepository implements INewsRepository {
     @Override
     public News getById(Integer id, Boolean includeNotPublished) {
         String sql = "SELECT * FROM news WHERE id = :id"
-            + buildSQLCondition(includeNotPublished, " AND publication_date < NOW()");
+            + buildSQLCondition(includeNotPublished, " AND publication_time < NOW()");
 
         RowMapper<News> rowMapper = new NewsRowMapper();
 
@@ -41,7 +41,8 @@ public class NewsRepository extends DAORepository implements INewsRepository {
     @Override
     public List<News> getNews(Integer offset, Integer limit, Boolean includeNotPublished) {
         String sql = "SELECT * FROM news "
-            + buildSQLCondition(includeNotPublished, "WHERE publication_date < NOW()")
+            + buildSQLCondition(includeNotPublished, "WHERE publication_time < NOW()")
+            + " ORDER BY publication_time DESC "
             + buildSQLOffsetLimit(offset, limit);
 
         RowMapper<News> rowMapper = new NewsRowMapper();
@@ -56,8 +57,17 @@ public class NewsRepository extends DAORepository implements INewsRepository {
 
     @Override
     public List<News> getNewsByCategoryId(Integer categoryId, Integer offset, Integer limit, Boolean includeNotPublished) {
-        String sql = "SELECT * FROM news WHERE category_id = :category_id "
-            + buildSQLCondition(includeNotPublished, " AND publication_date < NOW()")
+        String sql = "WITH RECURSIVE category_collection AS ( " +
+            "SELECT id, parent_id, creator_id, name, description, created_at, updated_at " +
+            "FROM news_categories " +
+            "WHERE id = :category_id " +
+            "UNION ALL " +
+            "SELECT nc.id, nc.parent_id, nc.creator_id, nc.name, nc.description, nc.created_at, nc.updated_at FROM news_categories AS nc " +
+            "JOIN category_collection ON category_collection.id = nc.parent_id " +
+            ") " +
+            "SELECT n.* FROM news n, category_collection c WHERE n.category_id = c.id "
+            + buildSQLCondition(includeNotPublished, " AND publication_time < NOW()")
+            + " ORDER BY publication_time DESC "
             + buildSQLOffsetLimit(offset, limit);
 
         RowMapper<News> rowMapper = new NewsRowMapper();
@@ -76,7 +86,8 @@ public class NewsRepository extends DAORepository implements INewsRepository {
     @Override
     public List<News> getNewsByAuthorId(Integer authorId, Integer offset, Integer limit, Boolean includeNotPublished) {
         String sql = "SELECT n.* FROM news n, news_authors na WHERE na.news_id = n.id AND na.author_id = :authorId "
-            + buildSQLCondition(includeNotPublished, " AND publication_date < NOW()")
+            + buildSQLCondition(includeNotPublished, " AND publication_time < NOW()")
+            + " ORDER BY publication_time DESC "
             + buildSQLOffsetLimit(offset, limit);
 
         RowMapper<News> rowMapper = new NewsRowMapper();

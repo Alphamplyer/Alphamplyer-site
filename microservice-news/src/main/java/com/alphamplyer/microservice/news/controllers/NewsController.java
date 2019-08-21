@@ -78,7 +78,7 @@ public class NewsController {
         return new ResponseEntity<>(news, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/newsCategory/{id}/news")
+    @GetMapping(value = "/categories/{id}/news")
     public ResponseEntity<List<News>> getNewsOfCategory(@PathVariable(name = "id") Integer id,
                                                         @RequestParam(name = "offset", required = false) Integer offset,
                                                         @RequestParam(name = "limit", required = false) Integer limit,
@@ -120,7 +120,7 @@ public class NewsController {
         return new ResponseEntity<>(news, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/newsCategory/{id}")
+    @GetMapping(value = "/categories/{id}")
     public ResponseEntity<NewsCategory> getCategoryById(@PathVariable(name = "id") Integer id) {
         NewsCategory category;
 
@@ -138,7 +138,7 @@ public class NewsController {
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/newsCategory/{id}/parent")
+    @GetMapping(value = "/categories/{id}/parent")
     public ResponseEntity<NewsCategory> getParentCategoryById(@PathVariable(name = "id") Integer id) {
         NewsCategory category;
 
@@ -156,7 +156,7 @@ public class NewsController {
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/newsCategory/{id}/child")
+    @GetMapping(value = "/categories/{id}/child")
     public ResponseEntity<List<NewsCategory>> getNewsCategoryChild(@PathVariable(name = "id") Integer id) {
         List<NewsCategory> categories;
 
@@ -169,6 +169,24 @@ public class NewsController {
 
         if (categories == null) {
             throw new NotFoundException(String.format("News category child was not found with news category ID = %d", id));
+        }
+
+        return new ResponseEntity<>(categories, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/categories/mains")
+    public ResponseEntity<List<NewsCategory>> getMainCategories() {
+        List<NewsCategory> categories;
+
+        try {
+            categories = newsCategoryRepository.getMainCategories();
+        } catch (DataAccessException e) {
+            logger.error("Main news categories was not found", e);
+            categories = null;
+        }
+
+        if (categories == null) {
+            throw new NotFoundException("Main news categories was not found");
         }
 
         return new ResponseEntity<>(categories, HttpStatus.OK);
@@ -196,7 +214,7 @@ public class NewsController {
         return new ResponseEntity<>(rNews, HttpStatus.CREATED);
     }
 
-    @PostMapping("/newsCategory/save")
+    @PostMapping("/categories/save")
     public ResponseEntity<NewsCategory> saveNewsCategory(@RequestBody NewsCategory newsCategory) {
         NewsCategory rNewsCategory;
 
@@ -231,7 +249,7 @@ public class NewsController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/newsCategory/{id}/update")
+    @PutMapping("/categories/{id}/update")
     public ResponseEntity<Void> updateNewsCategory(@PathVariable(name = "id") Integer id, @RequestBody NewsCategory newsCategory) {
 
         try {
@@ -261,7 +279,7 @@ public class NewsController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/newsCategory/{id}/delete")
+    @DeleteMapping("/categories/{id}/delete")
     public ResponseEntity<Void> updateNewsCategory(@PathVariable(name = "id") Integer id) {
 
         try {

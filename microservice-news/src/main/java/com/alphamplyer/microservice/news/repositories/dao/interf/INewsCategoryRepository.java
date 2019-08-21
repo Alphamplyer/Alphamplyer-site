@@ -12,6 +12,8 @@ public interface INewsCategoryRepository {
 
     List<NewsCategory> getChild(Integer id);
 
+    List<NewsCategory> getMainCategories();
+
     NewsCategory save(NewsCategory category);
 
     void update(Integer id, NewsCategory category);
