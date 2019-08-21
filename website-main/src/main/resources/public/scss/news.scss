@@ -13,7 +13,30 @@
 
 
 header {
-    height: $menu_height + 100px;
+    position: relative;
+    height: $menu_height + 150px;
+    margin-bottom: 20px;
+
+    h1 {
+        font-weight: 700;
+        font-size: 42px;
+        text-transform: uppercase;
+
+        position: absolute;
+        bottom: 0;
+        margin-left: 120px;
+
+        &:after {
+            content: "";
+            position: absolute;
+            height: 8px;
+            background: #ff4025;
+            width: 70px;
+            left: 0;
+            bottom: -0.3rem;
+            border-radius: 3px;
+        }
+    }
 }
 
 .news-container {

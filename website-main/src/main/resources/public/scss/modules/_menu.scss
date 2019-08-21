@@ -53,6 +53,7 @@ $menu_foreground_hover_color: #FFF;
                 vertical-align: middle;
 
                 & > a {
+                    font-weight: 400;
                     position: relative;
                     text-transform: uppercase;
                     padding-right: 21px;
@@ -76,7 +77,7 @@ $menu_foreground_hover_color: #FFF;
             .btn {
                 font-family: open sans,sans-serif;
                 font-size: 14px;
-                font-weight: 400;
+                font-weight: 500;
                 letter-spacing: .01em;
                 height: 30px;
                 line-height: 25px;

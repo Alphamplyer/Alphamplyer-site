@@ -56,7 +56,7 @@ button:focus {
   display: table; }
 
 body {
-  color: #626262;
+  color: #5a5a5a;
   line-height: 1.42857143;
   font-family: open sans, Arial, sans-serif;
   font-size: 14px;
@@ -67,6 +67,9 @@ body {
   -ms-text-size-adjust: 100%;
   -webkit-font-feature-settings: "kern" 1;
   -moz-font-feature-settings: "kern" 1; }
+
+h1, h2 {
+  color: #222222; }
 
 a {
   outline: 0 !important;

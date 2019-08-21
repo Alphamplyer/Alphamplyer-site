@@ -11,13 +11,17 @@
 }
 
 body {
-    color: #626262;
+    color: #5a5a5a;
     line-height: 1.42857143;
     font-family: open sans, Arial, sans-serif;
     font-size: 14px;
     font-weight: 300;
     letter-spacing: .01em;
     @include text-antialiasing;
+}
+
+h1, h2 {
+    color: #222222;
 }
 
 a {
