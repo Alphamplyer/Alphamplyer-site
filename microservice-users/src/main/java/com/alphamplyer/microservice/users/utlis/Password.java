@@ -1,47 +1,63 @@
 package com.alphamplyer.microservice.users.utlis;
 
-import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
-
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Random;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+
+// Get this code at : http://appsdeveloperblog.com/encrypt-user-password-example-java/
+// To secure password in database
 
 public class Password {
 
-    private static final byte[] charTable = new byte[] {
-        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W' ,'X' ,'Y' ,'Z',
-        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w' ,'x' ,'y' ,'z',
-        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-        '-', '_', '/', '.', '='
-    };
+    private static final Random RANDOM = new SecureRandom();
+    private static final String ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    private static final int ITERATIONS = 10000;
+    private static final int KEY_LENGTH = 256;
 
-    public static String encryptPassword (String password, String salt) {
-        Pbkdf2PasswordEncoder passwordEncoder = new Pbkdf2PasswordEncoder(salt, 10000, 128);
-        return passwordEncoder.encode(password);
+    public static String generateSalt(int length) {
+        StringBuilder returnValue = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            returnValue.append(ALPHABET.charAt(RANDOM.nextInt(ALPHABET.length())));
+        }
+        return new String(returnValue);
     }
 
-    public static String generateSalt(int size) {
-        byte[] bytes = new byte[size];
-        SecureRandom secureRandom;
-
+    public static byte[] hash(char[] password, byte[] salt) {
+        PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
+        Arrays.fill(password, Character.MIN_VALUE);
         try {
-            secureRandom = SecureRandom.getInstance("SHA1PRNG", "SUN");
-        } catch (NoSuchAlgorithmException | NoSuchProviderException e) {
-            secureRandom = new SecureRandom();
+            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            return skf.generateSecret(spec).getEncoded();
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new AssertionError("Error while hashing a password: " + e.getMessage(), e);
+        } finally {
+            spec.clearPassword();
         }
-
-        secureRandom.setSeed(SecureRandom.getSeed(512));
-        secureRandom.nextBytes(bytes);
-
-        for (int i = 0; i < size; i++) {
-            bytes[i] = charTable[(bytes[i] & 0xFF) % 67];
-        }
-
-        return new String(bytes);
     }
 
-    public static Boolean checkPassword(String enteredPassword, String savedPassword, String salt) {
-        return encryptPassword(enteredPassword, salt) == savedPassword;
+    public static String generateSecurePassword(String password, String salt) {
+        String returnValue = null;
+        byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
+
+        returnValue = Base64.getEncoder().encodeToString(securePassword);
+
+        return returnValue;
     }
 
+    public static boolean checkPassword(String providedPassword, String securedPassword, String salt) {
+        boolean returnValue = false;
+
+        // Generate New secure password with the same salt
+        String newSecurePassword = generateSecurePassword(providedPassword, salt);
+
+        // Check if two passwords are equal
+        returnValue = newSecurePassword.equalsIgnoreCase(securedPassword);
+
+        return returnValue;
+    }
 }

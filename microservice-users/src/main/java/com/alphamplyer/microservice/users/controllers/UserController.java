@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -126,19 +128,51 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/users/list")
+    public ResponseEntity<List<User>> getAuthorsByListOfIDs(@RequestParam String[] listIDs) {
+
+        if (listIDs.length == 0)
+            new ResponseEntity<>(null, HttpStatus.OK);
+
+        List<User> users;
+
+        int size = listIDs.length;
+        Integer[] arrID = new Integer[size];
+
+        for(int i = 0; i < size; i++) {
+            arrID[i] = Integer.parseInt(listIDs[i]);
+        }
+
+        try {
+            users = userRepository.getAllByListIDs(Arrays.asList(arrID));
+        } catch (DataAccessException e) {
+            logger.error("Users not found in database", e);
+            throw new NotFoundException("Users not found");
+        }
+
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
     //endregion
 
     //region // --- < POST MAPPING > ---------------------------------------------------------------------------------- //
 
-    @PostMapping(value = "users/login")
-    public ResponseEntity<User> login(@RequestParam(name = "email") String email, @RequestParam(name = "password") String password) {
+    @PostMapping(value = "/users/login")
+    public ResponseEntity<User> login(@RequestParam(name = "identifier") String identifier,
+                                      @RequestParam(name = "password") String password,
+                                      @RequestParam(name = "isEmail") Boolean isEmail) {
 
         User user;
 
         try {
-            user = userRepository.getByEmail(email);
+            if (isEmail) {
+                user = userRepository.getByEmail(identifier);
+            } else {
+                user = userRepository.getByUsername(identifier);
+            }
         } catch (DataAccessException e) {
-            throw new FailedToLoginException("Failed to login !");
+            System.out.println(e);
+            throw new FailedToLoginException("Failed to login.");
         }
 
         if (user == null)
@@ -162,6 +196,7 @@ public class UserController {
         User rUser = null;
 
         user.setSalt(Password.generateSalt(128));
+        user.setPassword(Password.generateSecurePassword(user.getPassword(), user.getSalt()));
 
         try {
             rUser = userRepository.insert(user);

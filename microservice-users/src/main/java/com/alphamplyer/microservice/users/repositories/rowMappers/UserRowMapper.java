@@ -12,11 +12,14 @@ public class UserRowMapper implements RowMapper<User> {
     public User mapRow(ResultSet rs, int i) throws SQLException {
         User user = new User();
 
-        user.setRoleId(rs.getInt("id"));
+        user.setId(rs.getInt("id"));
         user.setRoleId(rs.getInt("role_id"));
 
         user.setUsername(rs.getString("username"));
         user.setEmail(rs.getString("email"));
+
+        user.setPassword(rs.getString("password"));
+        user.setSalt(rs.getString("salt"));
 
         user.setTermAccepted(rs.getBoolean("term_accepted"));
         user.setEmailValidated(rs.getBoolean("email_validated"));
@@ -26,6 +29,6 @@ public class UserRowMapper implements RowMapper<User> {
         user.setCreatedAt(rs.getTimestamp("created_at"));
         user.setUpdatedAt(rs.getTimestamp("updated_at"));
 
-        return null;
+        return user;
     }
 }

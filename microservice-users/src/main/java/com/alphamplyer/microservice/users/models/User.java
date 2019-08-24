@@ -1,5 +1,7 @@
 package com.alphamplyer.microservice.users.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -10,6 +12,7 @@ public class User {
     private String username;
     private String email;
     private String password;
+    @JsonIgnore
     private String salt;
     private Boolean termAccepted;
     private Boolean emailValidated;

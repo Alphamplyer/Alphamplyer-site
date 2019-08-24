@@ -15,6 +15,8 @@ public interface IUserRepository {
 
     List<User> getAll(Integer offset, Integer limit);
     List<User> getAllByRoleID(Integer roleId, Integer offset, Integer limit);
+    List<User> getAllByListIDs(List<Integer> listIDs);
+
 
     User insert(User user);
     void update(User user);
