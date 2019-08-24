@@ -3,6 +3,7 @@ package com.alphamplyer.microservice.news.repositories.dao.impl;
 import com.alphamplyer.microservice.news.models.News;
 import com.alphamplyer.microservice.news.repositories.dao.DAORepository;
 import com.alphamplyer.microservice.news.repositories.dao.interf.INewsRepository;
+import com.alphamplyer.microservice.news.repositories.rowMappers.NewsAuthorsRowMapper;
 import com.alphamplyer.microservice.news.repositories.rowMappers.NewsRowMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
@@ -53,6 +54,22 @@ public class NewsRepository extends DAORepository implements INewsRepository {
             return null;
 
         return newsList;
+    }
+
+    @Override
+    public List<Integer> getNewsAuthor(Long news_id) {
+        String sql = "SELECT author_id FROM news_authors WHERE news_id = :news_id";
+
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("news_id", news_id);
+
+        RowMapper<Integer> rowMapper = new NewsAuthorsRowMapper();
+        List<Integer> authorIDs = namedParameterJdbcTemplate.query(sql, params, rowMapper);
+
+        if (authorIDs.isEmpty())
+            return null;
+
+        return authorIDs;
     }
 
     @Override

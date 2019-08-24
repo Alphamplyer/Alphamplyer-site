@@ -14,6 +14,8 @@ public interface INewsRepository {
 
     List<News> getNewsByAuthorId(Integer authorId, Integer offset, Integer limit, Boolean includeNotPublished);
 
+    List<Integer> getNewsAuthor(Long news_id);
+
     News save(News news);
 
     void update(Integer id, News news);

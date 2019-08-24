@@ -46,6 +46,8 @@ public class NewsController {
 
         try {
             news = newsRepository.getById(id, includePublished);
+            List<Integer> IDs = newsRepository.getNewsAuthor(news.getId());
+            news.setAuthors(IDs);
         } catch (DataAccessException e) {
             logger.error("News not found", e);
             news = null;

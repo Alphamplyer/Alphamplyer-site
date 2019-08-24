@@ -1,7 +1,10 @@
 package com.alphamplyer.microservice.news.repositories.rowMappers;
 
 import com.alphamplyer.microservice.news.models.News;
+import com.alphamplyer.microservice.news.repositories.dao.interf.INewsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
