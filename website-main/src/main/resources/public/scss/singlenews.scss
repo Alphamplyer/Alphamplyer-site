@@ -1,0 +1,86 @@
+// --- < VARIABLES > ---------------------------------------- //
+
+// --- < IMPORT > ------------------------------------------- //
+
+@import "base/base_imports";
+
+@import "modules/menu";
+
+// --- < SCSS > --------------------------------------------- //
+
+
+header {
+    position: relative;
+    height: $menu_height + 150px;
+    margin-bottom: 105px;
+
+    h1, ul, p {
+        position: absolute;
+    }
+
+    h1 {
+        font-weight: 700;
+        font-size: 42px;
+        text-transform: uppercase;
+        left: 120px;
+        bottom: 0;
+
+        &:after {
+            content: "";
+            position: absolute;
+            height: 8px;
+            background: #ff4025;
+            width: 70px;
+            left: 0;
+            bottom: -0.3rem;
+            border-radius: 3px;
+        }
+    }
+
+    ul {
+        list-style: none;
+        top: $menu_height + 10px;
+        left: 10px;
+
+        li {
+            display: inline-block;
+            i{
+                margin-right: 8px;
+            }
+            a {
+                color: #ee8764;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .date {
+
+            margin-right: 10px;
+        }
+    }
+
+    .description {
+        font-size: 0.9em;
+        top: 200px;
+        left: 235px;
+        width: 500px;
+    }
+}
+
+.singlenews-container {
+    margin: 0 20%;
+
+    .main-image, img {
+        width: 100%;
+    }
+
+    .main-image {
+        margin-bottom: 50px;
+    }
+
+    .news-content {
+        text-align: justify;
+    }
+}

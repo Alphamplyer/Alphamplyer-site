@@ -1,0 +1,102 @@
+// --- < VARIABLES > ---------------------------------------- //
+
+// --- < IMPORT > ------------------------------------------- //
+
+@import "base/base_imports";
+
+@import "modules/menu";
+
+// --- < SCSS > --------------------------------------------- //
+
+
+header {
+    position: relative;
+    height: $menu_height + 200px;
+    margin-bottom: 50px;
+
+    h1 {
+        font-weight: 700;
+        font-size: 42px;
+        text-transform: uppercase;
+
+        position: absolute;
+        bottom: 0;
+        margin-left: 120px;
+
+        &:after {
+            content: "";
+            position: absolute;
+            height: 8px;
+            background: #ff4025;
+            width: 70px;
+            left: 0;
+            bottom: -0.3rem;
+            border-radius: 3px;
+        }
+    }
+}
+
+.profile-container {
+    position: relative;
+    background-color: #eeeeee;
+    @include border-radius(7px);
+    margin: 0 100px;
+    padding: 20px;
+
+    .header-container {
+        position: absolute;
+        top: -45px;
+        right: 25px;
+
+        .edit-btn {
+            font-family: open sans,sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: .01em;
+            height: 30px;
+            line-height: 25px;
+
+            @include text-antialiasing;
+
+            border: 2px solid $menu_foreground_color;
+            @include border-radius(3px);
+
+            margin-bottom: 0;
+            text-align: center;
+            vertical-align: middle;
+
+            cursor: pointer;
+
+            color: $menu_foreground_color;
+
+            text-shadow: none;
+            box-shadow: none;
+
+            padding: 5px 17px;
+
+            position: relative;
+
+            @include transition(color, .3s, ease);
+            @include transition(background-color, .3s, ease);
+            @include transition(opacity, .3s, ease 0s !important);
+
+            &:hover {
+                color: $menu_foreground_hover_color;
+                background-color: $menu_foreground_color;
+            }
+        }
+    }
+
+    table {
+        text-align: left;
+
+        tr {
+            height: 30px;
+            vertical-align: middle;
+        }
+
+        th, td {
+            width: 200px;
+        }
+    }
+}

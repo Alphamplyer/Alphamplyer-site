@@ -239,7 +239,7 @@ a {
       background-color: #ececec; }
     .news .content h1 {
       line-height: 1;
-      margin: 0;
+      margin: 0 0 0.5em 0;
       font-size: 1.7rem; }
     .news .content .read-more {
       text-align: right; }

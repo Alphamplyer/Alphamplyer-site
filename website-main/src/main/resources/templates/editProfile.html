@@ -5,16 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" th:href="@{/css/login_register.css}">
+    <link rel="stylesheet" th:href="@{/css/edit_profile.css}">
     <script src="https://kit.fontawesome.com/6bdf0d0706.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
-    <title>Inscription</title>
+    <title th:text="${updateUser.username}">Profile</title>
 </head>
 
-<body id="connection">
-<div class="l-container">
+<body>
+<div th:replace="menu :: menu"></div>
+<header>
+    <img class="profile-img" src="" alt="">
+    <h1 th:text="${updateUser.username}"></h1>
+</header>
+<div class="profile-container">
     <div id="form-container">
-        <form th:action="@{/register}" th:object="${registerUser}" method="post">
+        <form th:action="@{'/profile/'+${id}+'/edit'}" th:object="${updateUser}" method="post">
             <fieldset class="clearfix">
                 <p><label th:if="${error != null}" th:text="${error}"></label></p>
 
@@ -24,24 +29,16 @@
                 <p><span class="fas fa-at"></span><input type="email" th:field="*{email}" id="email" name="email" placeholder="Email"></p>
                 <label for="email" th:each="error: ${#fields.errors('email')}" th:text="${error}"></label>
 
-                <p><span class="fas fa-calendar-day"></span><input type="text" th:field="*{birthDate}" id="birthDate" name="birthDate" placeholder="Birth date"></p>
-                <label for="birthDate" th:each="error: ${#fields.errors('birthDate')}" th:text="${error}"></label>
-
                 <p><span class="fas fa-lock"></span><input type="password" th:field="*{password}" id="password" name="password" placeholder="Password"></p>
                 <label for="password" th:each="error: ${#fields.errors('password')}" th:text="${error}"></label>
 
                 <p><span class="fas fa-lock"></span><input type="password" th:field="*{matchingPassword}" id="matchingPassword" name="matchingPassword" placeholder="Password confirmation"></p>
                 <label for="matchingPassword" th:each="error: ${#fields.errors('matchingPassword')}" th:text="${error}"></label>
 
-                <p class="check-box"><input type="checkbox" th:field="*{termAccepted}" name="termAccepted" id="termAccepted"><label for="termAccepted">accepter les <a href="">conditions d'utilisation</a></label></p>
-
-                <p><input type="submit" value="Sign In"></p>
+                <p><input type="submit" value="Save"></p>
             </fieldset>
         </form>
-        <p>Not a member? <a th:href="@{/login}">Sign in now</a><span class="fas fa-arrow-circle-right"></span></p>
     </div>
 </div>
-
 </body>
-
 </html>

@@ -114,6 +114,10 @@ p {
   left: 50%;
   position: fixed;
   top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%); }
 
 #form-container {
@@ -124,6 +128,8 @@ p {
 
 #form-container form span {
   background-color: #363b41;
+  -webkit-border-radius: 3px 0 0 3px;
+  -moz-border-radius: 3px 0 0 3px;
   border-radius: 3px 0 0 3px;
   color: #9ea2a6;
   display: block;
@@ -141,6 +147,8 @@ p {
 
 #form-container form input[type="text"], input[type="password"], input[type="email"] {
   background-color: #3b4148;
+  -webkit-border-radius: 0px 3px 3px 0px;
+  -moz-border-radius: 0px 3px 3px 0px;
   border-radius: 0px 3px 3px 0px;
   color: #9ea2a6;
   padding: 0 16px;
@@ -149,9 +157,9 @@ p {
     color: #85898d; }
 
 #form-container form input[type="submit"] {
-  border-radius: 3px;
-  -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
   background-color: #ff4025;
   color: #eee;
   font-weight: bold;
@@ -170,5 +178,21 @@ p {
 
 #form-container fieldset {
   border: none; }
+
+#form-container .check-box {
+  text-align: center; }
+  #form-container .check-box input[type="checkbox"] {
+    -webkit-appearance: checkbox;
+    position: relative;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    background-color: #222222;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px; }
+  #form-container .check-box label {
+    color: #5a5a5a; }
 
 /*# sourceMappingURL=login_register.css.map */

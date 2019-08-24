@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/singlenews.css}">
+    <script src="https://kit.fontawesome.com/6bdf0d0706.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+    <title>News</title>
+</head>
+
+<body id="univers">
+<div th:replace="menu :: menu"></div>
+<header>
+    <h1 th:text="${singlenews.news.title}"></h1>
+    <ul>
+        <li class="date"><i class="far fa-calendar-alt"></i><span th:text="${#dates.format(singlenews.news.publicationTime, 'dd MMM yyyy')} + ' à ' + ${#dates.format(singlenews.news.publicationTime, 'hh:mm')}" th:remove="tag">title</span></li>
+        <li class="authors"><i  class="fas fa-user"></i><a th:each="author : ${singlenews.authors}" th:href="@{'/profile/'+${author.id}}" th:text="${author.username}">Author</a></li>
+    </ul>
+    <p class="description" th:text="${singlenews.news.description}"></p>
+</header>
+
+<div class="singlenews-container">
+    <div class="main-image"><img th:src="@{/images/background/background.jpg}" alt=""></div>
+    <div class="news-content" th:text="${singlenews.news.content}">
+</div>
+</div>
+
+</body>
+
+</html>
