@@ -69,3 +69,4 @@ Later, I will surely try to protect microservices with a Gateway API. For that I
 ## Information : Projet Progress
 
 I'm planning the end of the first version in one to two weeks.
+I'm going to make a GPLv2 Licence in a first time to give at  more public exemple
