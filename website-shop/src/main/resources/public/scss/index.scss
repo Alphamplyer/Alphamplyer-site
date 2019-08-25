@@ -1,0 +1,32 @@
+// --- < VARIABLES > ---------------------------------------- //
+
+// --- < IMPORT > ------------------------------------------- //
+
+@import "base/base_imports";
+
+@import "modules/menu";
+@import "modules/news";
+
+// --- < SCSS > --------------------------------------------- //
+
+header {
+    height: $menu_height;
+}
+
+.news-section {
+    width: 50%;
+    min-width: 700px;
+    margin: 35vh auto auto 50px;
+
+
+    .news {
+        height: 25vh;
+        min-height: 300px;
+
+        .read-more {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+        }
+    }
+}

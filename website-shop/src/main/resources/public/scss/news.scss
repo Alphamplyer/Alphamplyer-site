@@ -1,0 +1,82 @@
+// --- < VARIABLES > ---------------------------------------- //
+
+// --- < IMPORT > ------------------------------------------- //
+
+@import "base/base_imports";
+
+@import "modules/menu";
+@import "modules/news";
+@import "modules/search-box";
+@import "modules/radio-button";
+
+// --- < SCSS > --------------------------------------------- //
+
+
+header {
+    position: relative;
+    height: $menu_height + 150px;
+    margin-bottom: 20px;
+
+    h1 {
+        font-weight: 700;
+        font-size: 42px;
+        text-transform: uppercase;
+
+        position: absolute;
+        bottom: 0;
+        margin-left: 120px;
+
+        &:after {
+            content: "";
+            position: absolute;
+            height: 8px;
+            background: #ff4025;
+            width: 70px;
+            left: 0;
+            bottom: -0.3rem;
+            border-radius: 3px;
+        }
+    }
+}
+
+.news-container {
+    display: grid;
+    padding: 20px;
+    grid-template-columns: auto 900px 20px 400px auto;
+
+    .news-section {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        place-self: start end;
+        width: 70%;
+        min-width: 700px;
+    }
+
+    aside {
+        width: 400px;
+        grid-column-start: 4;
+        grid-column-end: 5;
+        @include border-radius(5px);
+        background-color: $color_news-background;
+        place-self: start start;
+
+        .filters {
+            width: 100%;
+            padding: 15px;
+        }
+
+        .searchBox {
+            margin: 20px 0;
+        }
+
+        h3 {
+            margin-bottom: 10px;
+        }
+    }
+}
+
+@media screen and (max-width: 1380px) {
+    .news-container {
+        grid-template-columns: auto 700px 20px 400px auto;
+    }
+}

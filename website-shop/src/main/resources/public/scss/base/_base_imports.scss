@@ -1,0 +1,15 @@
+// --- < VARIABLES > ---------------------------------------- //
+
+$color_primary: #ff4025;
+
+$color_in-text-link: #212121;
+$color_in-text-link-hover: #F51;
+
+$color_input-background: #FFF;
+$color_input-foreground: #606468;
+
+// --- < IMPORT > ------------------------------------------- //
+
+@import "../mixins/mix";
+@import "./reset";
+@import "./base";

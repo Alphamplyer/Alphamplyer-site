@@ -1,0 +1,45 @@
+// --- < VARRIABLES > (--------------------------------------- //
+
+$searchbar-height: 40px;
+
+// --- < SCSS > --------------------------------------------- //
+
+.searchBox {
+    height: $searchbar-height;
+    @include border-radius($searchbar-height);
+    padding: 5px;
+    background: #222;
+}
+
+.searchButton:hover {
+    background: white;
+    color : #bababa;
+}
+
+.searchButton {
+    color: white;
+    border:none;
+    float: right;
+    width: $searchbar-height - 10px;
+    height: $searchbar-height - 10px;
+    border-radius: 50%;
+    background: $color_primary;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include transition(all, 0.2s)
+}
+
+.searchInput {
+    width: 320px;
+    border:none;
+    background: none;
+    outline:none;
+    float:left;
+    padding: 0 0 0 10px;
+    color: white;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: $searchbar-height - 9px;
+
+}
