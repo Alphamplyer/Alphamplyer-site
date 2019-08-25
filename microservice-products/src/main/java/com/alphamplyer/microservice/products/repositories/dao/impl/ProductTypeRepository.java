@@ -9,11 +9,12 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 
+@Repository
 public class ProductTypeRepository extends DAORepository implements IProductTypeRepository {
 
     @Override
