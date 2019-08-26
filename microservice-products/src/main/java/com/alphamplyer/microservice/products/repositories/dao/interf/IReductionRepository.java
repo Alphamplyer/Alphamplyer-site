@@ -8,8 +8,8 @@ public interface IReductionRepository {
 
     Reduction getByID (Integer id);
 
-    List<Reduction> getProductReduction (Integer productId);
-    List<Reduction> getProductByTypeReduction(Integer type_id);
+    List<Reduction> getProductReductions(Integer productId);
+    List<Reduction> getProductTypeReductions(Integer type_id);
 
     Reduction add (Reduction reduction);
     void deleteOldAndSaveNewPReduction(List<Integer> ProductIDs, Integer reductionID);

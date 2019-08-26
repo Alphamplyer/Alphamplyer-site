@@ -39,7 +39,7 @@ public class ReductionRepository extends DAORepository implements IReductionRepo
     }
 
     @Override
-    public List<Reduction> getProductReduction(Integer productId) {
+    public List<Reduction> getProductReductions(Integer productId) {
         String sql = "SELECT r.* " +
             "FROM reductions r, product_reduction pr, product_type_reduction ptr, products p " +
             "WHERE ((pr.product_id = p.id AND pr.reduction_id = r.id) OR (ptr.type_id = p.type_id AND ptr.reduction_id = r.id)) " +
@@ -51,7 +51,7 @@ public class ReductionRepository extends DAORepository implements IReductionRepo
     }
 
     @Override
-    public List<Reduction> getProductByTypeReduction(Integer type_id) {
+    public List<Reduction> getProductTypeReductions(Integer type_id) {
         String sql = "SELECT r.* " +
             "FROM reductions r, product_type_reduction ptr, products p " +
             "WHERE ptr.type_id = p.type_id AND ptr.reduction_id = r.id AND p.id = :id";

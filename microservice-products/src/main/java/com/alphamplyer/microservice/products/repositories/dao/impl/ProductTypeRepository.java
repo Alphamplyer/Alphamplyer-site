@@ -58,7 +58,7 @@ public class ProductTypeRepository extends DAORepository implements IProductType
     }
 
     @Override
-    public List<ProductType> getChild(Integer id) {
+    public List<ProductType> getChilds(Integer id) {
         String sql = "SELECT * FROM product_types WHERE parent_id = :id";
 
         RowMapper<ProductType> rowMapper = new ProductTypeRowMapper();
@@ -93,15 +93,15 @@ public class ProductTypeRepository extends DAORepository implements IProductType
         String sql = "INSERT INTO product_types (parent_id, code, name, description) " +
             "VALUES (:parent_id, :code, :name, :description)";
 
-        MapSqlParameterSource params_news = new MapSqlParameterSource();
-        params_news.addValue("parent_id", productType.getParentId());
-        params_news.addValue("code", productType.getCode());
-        params_news.addValue("name", productType.getName());
-        params_news.addValue("description", productType.getDescription());
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("parent_id", productType.getParentId());
+        params.addValue("code", productType.getCode());
+        params.addValue("name", productType.getName());
+        params.addValue("description", productType.getDescription());
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        namedParameterJdbcTemplate.update(sql, params_news, keyHolder);
+        namedParameterJdbcTemplate.update(sql, params, keyHolder);
 
         HashMap<String, Object> keys;
 
@@ -121,14 +121,14 @@ public class ProductTypeRepository extends DAORepository implements IProductType
             "SET parent_id = :parent_id, code = :code, name = :name, description = :description " +
             "WHERE id = :id";
 
-        MapSqlParameterSource params_news = new MapSqlParameterSource();
-        params_news.addValue("id", productType.getId());
-        params_news.addValue("parent_id", productType.getParentId());
-        params_news.addValue("code", productType.getCode());
-        params_news.addValue("name", productType.getName());
-        params_news.addValue("description", productType.getDescription());
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("id", productType.getId());
+        params.addValue("parent_id", productType.getParentId());
+        params.addValue("code", productType.getCode());
+        params.addValue("name", productType.getName());
+        params.addValue("description", productType.getDescription());
 
-        namedParameterJdbcTemplate.update(sql, params_news);
+        namedParameterJdbcTemplate.update(sql, params);
     }
 
     @Override

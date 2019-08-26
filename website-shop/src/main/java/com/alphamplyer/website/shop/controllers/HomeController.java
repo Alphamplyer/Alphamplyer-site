@@ -27,7 +27,7 @@ public class HomeController {
         List<Product> products = null;
 
         try {
-            products = microserviceProductsProxy.getAll(null, 10, false, false);
+            products = microserviceProductsProxy.getProducts(null, 10, false, false);
         } catch (FeignException e) {
             return "error";
         }

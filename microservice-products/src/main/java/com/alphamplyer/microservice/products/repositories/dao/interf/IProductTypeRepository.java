@@ -9,7 +9,7 @@ public interface IProductTypeRepository {
     ProductType getByID (Integer id);
     ProductType getParent (Integer id);
 
-    List<ProductType> getChild (Integer id);
+    List<ProductType> getChilds(Integer id);
     List<ProductType> getMainProductType ();
 
     ProductType add (ProductType productType);
