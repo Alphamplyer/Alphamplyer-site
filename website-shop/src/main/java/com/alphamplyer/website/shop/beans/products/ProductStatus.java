@@ -1,5 +1,8 @@
 package com.alphamplyer.website.shop.beans.products;
 
+/**
+ * Enum to describe status of a product object
+ */
 public enum ProductStatus {
     AVAILABLE,
     LIMITED_IN_TIME,

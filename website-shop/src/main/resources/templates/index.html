@@ -8,16 +8,26 @@
     <link rel="stylesheet" th:href="@{/css/index.css}">
     <script src="https://kit.fontawesome.com/6bdf0d0706.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
-    <title>Accueil</title>
+    <title>Boutique</title>
 </head>
 
 <body id="index">
     <div th:replace="menu :: menu"></div>
     <header>
-
+        <h1>Boutique</h1>
     </header>
 
-    <p th:if="${products != null}">OK</p>
+    <section class="products-container">
+        <div class="products">
+            <div class="product" th:each="product : ${products}">
+                <div class="product-bottom">
+                    <p class="name"><a th:href="@{'/products/'+${product.id}}" th:text="${product.name}">Product Name</a></p>
+                    <span class="price" th:text="${product.price}+' €'">9.99 €</span>
+                    <a th:href="@{'/basket/add/'+${product.id}}" class="btn">Add</a>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 
 </html>

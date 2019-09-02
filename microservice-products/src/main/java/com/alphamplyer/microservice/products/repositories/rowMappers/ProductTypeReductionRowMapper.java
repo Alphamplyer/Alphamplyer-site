@@ -6,6 +6,9 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Row Mapper to deserialize result of database into ProductTypeReduction object
+ */
 public class ProductTypeReductionRowMapper implements RowMapper<ProductTypeReduction> {
 
     @Override

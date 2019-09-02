@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <script src="https://kit.fontawesome.com/6bdf0d0706.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+    <title>Boutique</title>
+</head>
+
+<body id="index">
+    <div th:replace="menu :: menu"></div>
+    <header>
+        <h1 th:text="${product.name}"></h1>
+    </header>
+
+    <section class="display-product">
+        <img src="" alt="">
+        <span class="price" th:text="${product.price}+' €'"></span>
+        <a th:href="@{'/basket/add/'+${product.id}}" class="btn"></a>
+        <p class="description" th:text="${product.description}"></p>
+    </section>
+</body>
+
+</html>

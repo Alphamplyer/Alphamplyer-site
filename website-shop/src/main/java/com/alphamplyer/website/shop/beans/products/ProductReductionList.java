@@ -2,6 +2,9 @@ package com.alphamplyer.website.shop.beans.products;
 
 import java.util.List;
 
+/**
+ * Object for controller transaction of list of product reduction
+ */
 public class ProductReductionList {
 
     public List<Integer> productIDs;

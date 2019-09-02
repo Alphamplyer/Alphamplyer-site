@@ -12,6 +12,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -92,29 +93,28 @@ public class NewsCategoryRepository extends DAORepository implements INewsCatego
     @Override
     public NewsCategory save(NewsCategory category) {
         String sql = "INSERT INTO news_categories (parent_id, creator_id, name, description, created_at, updated_at) " +
-            "VALUES (:parent_id, :creator_id, :name, :description, :created_at, :updated_at)";
-
-        Timestamp now = new Timestamp(System.currentTimeMillis());
+            "VALUES (:parent_id, :creator_id, :name, :description, NOW(), NOW())";
 
         MapSqlParameterSource params_news = new MapSqlParameterSource();
         params_news.addValue("parent_id", category.getParentId());
         params_news.addValue("creator_id", category.getCreatorId());
         params_news.addValue("name", category.getName());
         params_news.addValue("description", category.getDescription());
-        params_news.addValue("created_at", now);
-        params_news.addValue("updated_at", now);
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         namedParameterJdbcTemplate.update(sql, params_news, keyHolder);
 
-        if (keyHolder.getKey() == null) {
-            return null;
-        }
+        HashMap<String, Object> keys;
 
-        category.setId(keyHolder.getKey().intValue());
-        category.setCreatedAt(now);
-        category.setUpdatedAt(now);
+        if (keyHolder.getKeys() != null)
+            keys = new HashMap<String, Object>(keyHolder.getKeys());
+        else
+            return null;
+
+        category.setId((Integer)keys.get("id"));
+        category.setCreatedAt((Timestamp) keys.get("created_at"));
+        category.setUpdatedAt((Timestamp) keys.get("updated_at"));
 
         return category;
     }

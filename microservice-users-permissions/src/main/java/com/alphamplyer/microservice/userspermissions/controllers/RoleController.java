@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 public class RoleController {
 
@@ -25,6 +26,11 @@ public class RoleController {
         this.roleRepository = roleRepository;
     }
 
+    /**
+     * Get role from its ID
+     * @param id role ID
+     * @return role or a NotFoundException error
+     */
     @GetMapping(value = "/roles/{id}")
     public ResponseEntity<Role> getRole(@PathVariable(name = "id") Integer id) {
         Role role;

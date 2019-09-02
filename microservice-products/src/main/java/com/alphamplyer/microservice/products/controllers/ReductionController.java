@@ -27,6 +27,11 @@ public class ReductionController {
         this.reductionRepository = reductionRepository;
     }
 
+    /**
+     * Get a reduction from its ID
+     * @param id reduction ID
+     * @return a reduction or a NotFoundException/BadRequestException error
+     */
     @GetMapping(value = "/reductions/id/{id}")
     ResponseEntity<Reduction> getByID (@PathVariable(name = "id") Integer id) {
         if (id == null || id < 0)
@@ -44,6 +49,11 @@ public class ReductionController {
         return new ResponseEntity<>(reduction, HttpStatus.OK);
     }
 
+    /**
+     * Return a list of product reduction from the product ID
+     * @param id product ID
+     * @return a list of product reduction or a NotFoundException error
+     */
     @GetMapping(value = "/reductions/product/{id}")
     ResponseEntity<List<Reduction>> getProductReduction (@PathVariable(name = "id") Integer id) {
 
@@ -59,6 +69,11 @@ public class ReductionController {
         return new ResponseEntity<>(reductions, HttpStatus.OK);
     }
 
+    /**
+     * Return a list of product type reduction from product type ID
+     * @param id product type ID
+     * @return a list of product type reduction or a NotFoundException error
+     */
     @GetMapping(value = "/reductions/productType/{id}")
     ResponseEntity<List<Reduction>> getProductByTypeReduction(@PathVariable(name = "id") Integer id) {
         List<Reduction> reductions;
@@ -73,6 +88,11 @@ public class ReductionController {
         return new ResponseEntity<>(reductions, HttpStatus.OK);
     }
 
+    /**
+     * Add a reduction
+     * @param reduction reduction to add
+     * @return added reduction or an UnableToInsertException error
+     */
     @PostMapping(value = "/reductions/add")
     ResponseEntity<Reduction> add (@RequestBody Reduction reduction) {
         Reduction rReduction = null;
@@ -89,6 +109,12 @@ public class ReductionController {
 
         return new ResponseEntity<>(rReduction, HttpStatus.CREATED);
     }
+
+    /**
+     * Replace the list of product reductions of a product
+     * @param productReductionList product reduction list data
+     * @return HttpResponse OK or an UnableToUpdateException error
+     */
     @PostMapping(value = "/reductions/add/product")
     ResponseEntity<Void> deleteOldAndSaveNewPReduction(@RequestBody ProductReductionList productReductionList) {
         try {
@@ -100,6 +126,12 @@ public class ReductionController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    /**
+     * Replace the list of product type reductions of a product
+     * @param productTypeReductionList product type reduction list data
+     * @return HttpResponse OK or an UnableToUpdateException error
+     */
     @PostMapping(value = "/reductions/add/productType")
     ResponseEntity<Void> deleteOldAndSaveNewPTypeReduction(@RequestBody ProductTypeReductionList productTypeReductionList) {
         try {
@@ -112,6 +144,11 @@ public class ReductionController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * Update a reduction
+     * @param reduction reduction data
+     * @return HttpResponse OK or an UnableToUpdateException error
+     */
     @PutMapping(value = "/reductions/save")
     ResponseEntity<Void> save (@RequestBody Reduction reduction) {
         try {
@@ -123,6 +160,12 @@ public class ReductionController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    /**
+     * Delete a reduction
+     * @param id reduction ID
+     * @return HttpResponse OK or an UnableToDeleteException error
+     */
     @DeleteMapping(value = "/reduction/delete/{id}")
     ResponseEntity<Void> delete (@PathVariable(name = "id") Integer id) {
         if (id == null || id < 0)

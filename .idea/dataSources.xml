@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="alphamplyer-microservice-news@localhost" uuid="422175b9-a7f5-45b2-a21f-65d9e646722e">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/alphamplyer-microservice-news</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="alphamplyer-microservice-users@localhost" uuid="fb44c6e5-f4d7-487c-bfc6-2c8739c0d948">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/alphamplyer-microservice-users</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="alphamplyer-microservice-users-permissions@localhost" uuid="bc2007e8-e5a1-495d-adc7-c76543a9bd2a">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/alphamplyer-microservice-users-permissions</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="alphamplyer-microservice-products@localhost" uuid="8405c5e8-9247-49c7-9ebb-0cdf585f3815">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/alphamplyer-microservice-products</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="alphamplyer-microservice-orders@localhost" uuid="f7ddcf07-179d-4160-9346-384da2e0ca66">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/alphamplyer-microservice-orders</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="alphamplyer-microservice-payments@localhost" uuid="af97f9b0-29c0-4ff0-a534-3f1e30d8121c">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/alphamplyer-microservice-payments</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="alphamplyer-microservice-comments@localhost" uuid="6bb0407d-b741-4177-9a96-367e39f42feb">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/alphamplyer-microservice-comments</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="alphamplyer-microservice-images@localhost" uuid="3ab27549-f652-493b-ae36-4348e6220179">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/alphamplyer-microservice-images</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="alphamplyer-microservice-forum@localhost" uuid="8a1438cd-4763-4cf7-836a-72d88f3e2a68">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/alphamplyer-microservice-forum</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="alphamplyer-microservice-stories@localhost" uuid="aa470369-317e-4c66-ae73-7f6de79ef140">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/alphamplyer-microservice-stories</jdbc-url>
+    </data-source>
+  </component>
+</project>

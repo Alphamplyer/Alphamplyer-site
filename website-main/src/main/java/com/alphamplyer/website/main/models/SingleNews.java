@@ -12,16 +12,34 @@ public class SingleNews {
 
     public SingleNews() { }
 
+    /**
+     * Get news
+     * @return news
+     */
     public News getNews() {
         return news;
     }
+
+    /**
+     * Get news authors
+     * @return news authors
+     */
     public List<User> getAuthors() {
         return authors;
     }
 
+    /**
+     * Define news
+     * @param news news
+     */
     public void setNews(News news) {
         this.news = news;
     }
+
+    /**
+     * Define authors
+     * @param authors authors
+     */
     public void setAuthors(List<User> authors) {
         this.authors = authors;
     }

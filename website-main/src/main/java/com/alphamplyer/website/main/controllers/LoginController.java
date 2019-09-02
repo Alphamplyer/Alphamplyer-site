@@ -29,6 +29,9 @@ public class LoginController {
     }
 
 
+    /**
+     * Display login page
+     */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginDisplay(Model model) {
         LoginUser loginUser = new LoginUser();
@@ -36,6 +39,10 @@ public class LoginController {
         return "login";
     }
 
+    /**
+     * try to login user. Display the login page with error if we failed to login user. Redirect him to index page if success
+     * @param loginUser user data
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login(@Valid @ModelAttribute LoginUser loginUser, BindingResult result, HttpSession session) {
 
@@ -66,6 +73,9 @@ public class LoginController {
         return new ModelAndView("redirect:index");
     }
 
+    /**
+     * Log out the user and redirect him to index page
+     */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(Model model, HttpSession session) {
         if (session.getAttribute("user") != null) {

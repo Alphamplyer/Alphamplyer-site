@@ -4,8 +4,17 @@ import com.alphamplyer.microservice.users.models.VerificationToken;
 
 public interface IVerificationTokenRepository {
 
+    /**
+     * Get verification token by its token
+     * @param token verification token token
+     * @return a verification token or null
+     */
     VerificationToken getVerificationToken(String token);
 
-    void save(VerificationToken verificationToken);
+    /**
+     * Insert a verification token
+     * @param verificationToken verification token data
+     */
+    void add(VerificationToken verificationToken);
 
 }

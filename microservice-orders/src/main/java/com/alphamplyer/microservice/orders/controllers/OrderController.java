@@ -25,7 +25,11 @@ public class OrderController {
         this.orderRepository = orderRepository;
     }
 
-
+    /**
+     * Get Order from its ID
+     * @param id order ID
+     * @return order or 404 error if not founded
+     */
     @GetMapping(value = "/orders/id/{id}")
     public ResponseEntity<Order> getOrderByID(@PathVariable(name = "id") Integer id) {
         if (id == null || id < 0)
@@ -43,6 +47,11 @@ public class OrderController {
         return new ResponseEntity<>(order, HttpStatus.OK);
     }
 
+    /**
+     * Get list of user order
+     * @param id user ID
+     * @return list of user order
+     */
     @GetMapping(value = "/orders/user/{id}")
     public ResponseEntity<List<Order>> getUserOrders (@PathVariable(name = "id") Integer id) {
 
@@ -62,6 +71,11 @@ public class OrderController {
     }
 
 
+    /**
+     * Add order
+     * @param order order data
+     * @return saved order or error 500
+     */
     @PostMapping(value = "/orders/add")
     public ResponseEntity<Order> addOrder (Order order) {
         Order rOrder = null;
@@ -80,6 +94,11 @@ public class OrderController {
     }
 
 
+    /**
+     * Update order
+     * @param order order data
+     * @return OK http status or internal error
+     */
     @PutMapping(value = "/orders/save")
     public ResponseEntity<Void> saveOrder (Order order) {
         try {
@@ -92,7 +111,11 @@ public class OrderController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
+    /**
+     * Delete order
+     * @param id order ID
+     * @return OK http status or internal error
+     */
     @DeleteMapping(value = "/orders/delete/{id}")
     public ResponseEntity<Void> deleteOrder (@PathVariable(name = "id") Integer id) {
         if (id == null || id < 0)

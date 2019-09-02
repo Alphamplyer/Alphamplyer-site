@@ -75,11 +75,11 @@ public class NewsRepository extends DAORepository implements INewsRepository {
     @Override
     public List<News> getNewsByCategoryId(Integer categoryId, Integer offset, Integer limit, Boolean includeNotPublished) {
         String sql = "WITH RECURSIVE category_collection AS ( " +
-            "SELECT id, parent_id, creator_id, name, description, created_at, updated_at " +
+            "SELECT id, parent_id " +
             "FROM news_categories " +
             "WHERE id = :category_id " +
             "UNION ALL " +
-            "SELECT nc.id, nc.parent_id, nc.creator_id, nc.name, nc.description, nc.created_at, nc.updated_at FROM news_categories AS nc " +
+            "SELECT nc.id, nc.parent_id FROM news_categories AS nc " +
             "JOIN category_collection ON category_collection.id = nc.parent_id " +
             ") " +
             "SELECT n.* FROM news n, category_collection c WHERE n.category_id = c.id "

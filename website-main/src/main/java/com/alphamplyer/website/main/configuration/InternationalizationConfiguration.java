@@ -10,6 +10,10 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import java.util.Locale;
 
+
+/**
+ * Configure spring to use local messages
+ */
 @Configuration
 public class InternationalizationConfiguration implements WebMvcConfigurer {
 

@@ -1,5 +1,8 @@
 package com.alphamplyer.microservice.orders.models.enums;
 
+/**
+ * Enum to describe a status of an order
+ */
 public enum OrderStatus {
     CANCELED,
     CLOSED,

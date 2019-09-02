@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 
+/**
+ * Define basic methods and variables used in repositories class
+ */
 @Component
 public class DAORepository {
 
@@ -19,6 +22,12 @@ public class DAORepository {
         namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
+    /**
+     * Returns the piece of an SQL query to limit or not the result according to the given parameters.
+     * @param offset from how many results does the selection start?
+     * @param limit how many results are expected at the maximum?
+     * @return A string representing a piece of SQL query
+     */
     protected String buildSQLOffsetLimit(Integer offset, Integer limit) {
         String sql = "";
 
@@ -28,6 +37,12 @@ public class DAORepository {
         return sql.trim();
     }
 
+    /**
+     * Return a piece of SQL query if the state of the condition is true
+     * @param active the state of the condition
+     * @param sqlToAdd the piece of SQL query to add
+     * @return A string representing a piece of SQL query
+     */
     protected String buildSQLCondition(Boolean active, String sqlToAdd) {
         if (active != null && active)
             return sqlToAdd;

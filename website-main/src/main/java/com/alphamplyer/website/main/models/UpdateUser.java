@@ -22,17 +22,32 @@ public class UpdateUser implements IUserValidation {
 
     public UpdateUser() { }
 
-    public String getUsername() {
-        return username;
-    }
+    /**
+     * Get user username
+     * @return user username
+     */
+    public String getUsername() { return username; }
+
+    /**
+     * Get user email
+     * @return user email
+     */
+    public String getEmail() { return email; }
+
+    /**
+     * Get user password
+     * @return user password
+     */
     public String getPassword() {
         return password;
     }
+
+    /**
+     * Get matching password
+     * @return matching password
+     */
     public String getMatchingPassword() {
         return matchingPassword;
-    }
-    public String getEmail() {
-        return email;
     }
 
     @Override
@@ -44,17 +59,32 @@ public class UpdateUser implements IUserValidation {
         return matchingPassword;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    /**
+     * Define user username
+     * @param username user username
+     */
+    public void setUsername(String username) { this.username = username; }
+
+    /**
+     * Define user email
+     * @param email user email
+     */
+    public void setEmail(String email) { this.email = email; }
+
+    /**
+     * Define user password
+     * @param password user password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
+
+    /**
+     * Define matching password
+     * @param matchingPassword  matching password
+     */
     public void setMatchingPassword(String matchingPassword) {
         this.matchingPassword = matchingPassword;
-    }
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     @Override

@@ -28,6 +28,9 @@ public class RegisterController {
         this.microserviceUserProxy = microserviceUserProxy;
     }
 
+    /**
+     * Display register page
+     */
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerDisplay(Model model) {
         RegisterUser registerUser = new RegisterUser();
@@ -35,6 +38,9 @@ public class RegisterController {
         return "register";
     }
 
+    /**
+     * Register an user and redirect him to the login page. Show error if exist
+     */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView register(@Valid @ModelAttribute RegisterUser registerUser, BindingResult result) {
 

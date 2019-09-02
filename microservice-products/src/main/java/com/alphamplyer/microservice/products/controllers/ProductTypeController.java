@@ -25,6 +25,11 @@ public class ProductTypeController {
         this.productTypeRepository = productTypeRepository;
     }
 
+    /**
+     * Get product type with its ID
+     * @param id product type ID
+     * @return a product type or a NotFoundException/BadRequestException error
+     */
     @GetMapping(value = "/productType/id/{id}")
     ResponseEntity<ProductType> getByID (@PathVariable(name = "id") Integer id) {
         if (id == null || id < 0)
@@ -41,6 +46,12 @@ public class ProductTypeController {
 
         return new ResponseEntity<>(productType, HttpStatus.OK);
     }
+
+    /**
+     * Get the product type parent of the product type with the given ID
+     * @param id product type ID
+     * @return a product type or a NotFoundException/BadRequestException error
+     */
     @GetMapping(value = "/productType/parent/{id}")
     ResponseEntity<ProductType> getParent (@PathVariable(name = "id") Integer id) {
         if (id == null || id < 0)
@@ -57,6 +68,12 @@ public class ProductTypeController {
 
         return new ResponseEntity<>(productType, HttpStatus.OK);
     }
+
+    /**
+     * Get all child of a product type with its id
+     * @param id product type ID
+     * @return a list of child product type or a NotFoundException/BadRequestException error
+     */
     @GetMapping(value = "/productType/childs/{id}")
     ResponseEntity<List<ProductType>> getChilds (@PathVariable(name = "id") Integer id) {
         if (id == null || id < 0)
@@ -73,6 +90,11 @@ public class ProductTypeController {
 
         return new ResponseEntity<>(productTypes, HttpStatus.OK);
     }
+
+    /**
+     * Get the mains product type (product type with no parent)
+     * @return a list of product type or a NotFoundException/BadRequestException error
+     */
     @GetMapping(value = "/productType/mains")
     ResponseEntity<List<ProductType>> getMainProductType () {
         List<ProductType> productTypes;
@@ -87,6 +109,11 @@ public class ProductTypeController {
         return new ResponseEntity<>(productTypes, HttpStatus.OK);
     }
 
+    /**
+     * Add a product type
+     * @param productType product type to add
+     * @return added product type or a UnableToInsertException
+     */
     @PostMapping(value = "/productType/add")
     ResponseEntity<ProductType> add (@RequestBody ProductType productType) {
         ProductType rProductType = null;
@@ -103,6 +130,12 @@ public class ProductTypeController {
 
         return new ResponseEntity<>(rProductType, HttpStatus.CREATED);
     }
+
+    /**
+     * Update a product type
+     * @param productType product type to update
+     * @return HttpResponse OK or a UnableToUpdateException
+     */
     @PutMapping(value = "/productType/save")
     ResponseEntity<Void> save (@RequestBody ProductType productType) {
         try {
@@ -114,6 +147,12 @@ public class ProductTypeController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    /**
+     * Delete a product type
+     * @param id product type ID
+     * @return HttpResponse OK or UnableToDeleteException
+     */
     @DeleteMapping(value = "/productType/delete/{id}")
     ResponseEntity<Void> delete (@PathVariable(name = "id") Integer id) {
         if (id == null || id < 0)

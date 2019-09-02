@@ -22,7 +22,7 @@
                             <li><a class="btn" th:href="@{'/login'}" th:text="#{menu.login}">login</a></li>
                         </th:block>
                         <th:block th:unless="${session.user == null}">
-                            <li><a class="btn" th:href="@{'/profile/'+${session.user.id}}" th:text="${session.user.username}"></a></li>
+                            <li><a class="btn" th:href="@{'http://localhost:8080/profile/'+${session.user.id}}" th:text="${session.user.username}"></a></li>
                             <li><a class="btn" th:href="@{'/logout'}" th:text="#{menu.logout}">logout</a></li>
                         </th:block>
                     </ul>

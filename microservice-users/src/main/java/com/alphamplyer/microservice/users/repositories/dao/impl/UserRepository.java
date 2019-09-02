@@ -178,9 +178,6 @@ public class UserRepository extends DAORepository implements IUserRepository {
 
     @Override
     public void update(User user) {
-
-        System.out.println(user.toString());
-
         String sql = "UPDATE users SET";
 
         MapSqlParameterSource params = new MapSqlParameterSource();

@@ -72,7 +72,7 @@ public class ProductRepository extends DAORepository implements IProductReposito
             whereCloseAdded = true;
             sql += "WHERE available_from < NOW() ";
         }
-        if (includeNoAvailable) {
+        if (!includeNoAvailable) {
             if (whereCloseAdded) {
                 sql += "AND status <> 'NO_AVAILABLE' ";
             }

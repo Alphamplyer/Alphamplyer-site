@@ -1,5 +1,8 @@
 package com.alphamplyer.microservice.products.models;
 
+/**
+ * Enum to describe status of a product object
+ */
 public enum ProductStatus {
     AVAILABLE,
     LIMITED_IN_TIME,

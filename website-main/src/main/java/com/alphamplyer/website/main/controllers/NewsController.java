@@ -32,7 +32,9 @@ public class NewsController {
         this.microserviceUserProxy = microserviceUserProxy;
     }
 
-
+    /**
+     * Display news page
+     */
     @RequestMapping(value = "/news")
     public String listOfNewsDisplay(Model model) {
 
@@ -52,6 +54,9 @@ public class NewsController {
         return "news";
     }
 
+    /**
+     * Display single news page
+     */
     @RequestMapping(value = "/news/{id}")
     public String displayNews (Model model, @PathVariable(name = "id") Integer id) {
 

@@ -24,7 +24,7 @@ public class VerificationTokenRepository extends DAORepository implements IVerif
     }
 
     @Override
-    public void save(VerificationToken verificationToken) {
+    public void add(VerificationToken verificationToken) {
         String sql = "INSERT INTO verification_tokens (token, user_id, expiry_date_time) VALUES (:token, :user_id, :expiry_date_time)";
 
         MapSqlParameterSource params = new MapSqlParameterSource();

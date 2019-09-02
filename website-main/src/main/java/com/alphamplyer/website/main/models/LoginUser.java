@@ -15,16 +15,35 @@ public class LoginUser {
 
     public LoginUser() { }
 
+
+    /**
+     * Get user identifier (email or username)
+     * @return identifier
+     */
     public String getIdentifier() {
         return identifier;
     }
+
+    /**
+     * Get password
+     * @return password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Define identifier (email or username)
+     * @param identifier email or username
+     */
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
     }
+
+    /**
+     * Define password
+     * @param password password
+     */
     public void setPassword(String password) {
         this.password = password;
     }

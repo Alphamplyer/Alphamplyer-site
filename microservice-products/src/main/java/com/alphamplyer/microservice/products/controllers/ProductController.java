@@ -25,6 +25,14 @@ public class ProductController {
         this.productRepository = productRepository;
     }
 
+
+    /**
+     * Get a product from its ID
+     * @param id ID of the product
+     * @param includeNoAvailableToPublic Should the search include items not available to the public ?
+     * @param includeNoAvailable Should the search include unavailable items ?
+     * @return a product or a NotFoundException/BadRequestException error
+     */
     @GetMapping(value = "/products/id/{id}")
     public ResponseEntity<Product> getByID (@PathVariable(name = "id") Integer id,
                                             @RequestParam(name = "includeNoAvailableToPublic") Boolean includeNoAvailableToPublic,
@@ -44,6 +52,13 @@ public class ProductController {
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
+    /**
+     * Get a product from its code
+     * @param code code of the product
+     * @param includeNoAvailableToPublic Should the search include items not available to the public ?
+     * @param includeNoAvailable Should the search include unavailable items ?
+     * @return a product or a NotFoundException/BadRequestException error
+     */
     @GetMapping(value = "/products/code/{code}")
     public ResponseEntity<Product> getByCode (@PathVariable(name = "code") String code,
                                               @RequestParam(name = "includeNoAvailableToPublic") Boolean includeNoAvailableToPublic,
@@ -65,6 +80,14 @@ public class ProductController {
 
     }
 
+    /**
+     * Get the list of the product depending of parameters
+     * @param offset from how many results does the selection start?
+     * @param limit how many results are expected at the maximum?
+     * @param includeNoAvailableToPublic Should the search include items not available to the public ?
+     * @param includeNoAvailable Should the search include unavailable items ?
+     * @return a list of the product or a NotFoundException/BadRequestException error
+     */
     @GetMapping(value = "/products")
     public ResponseEntity<List<Product>> getAll (@RequestParam(name = "offset", required = false) Integer offset,
                                                  @RequestParam(name = "limit", required = false) Integer limit,
@@ -87,6 +110,15 @@ public class ProductController {
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
+    /**
+     * Get the list of the product depending of parameters and the type ID
+     * @param id Type ID
+     * @param offset from how many results does the selection start?
+     * @param limit how many results are expected at the maximum?
+     * @param includeNoAvailableToPublic Should the search include items not available to the public ?
+     * @param includeNoAvailable Should the search include unavailable items ?
+     * @return a list of the product or a NotFoundException/BadRequestException error
+     */
     @GetMapping(value = "/products/type/{id}")
     public ResponseEntity<List<Product>> getAllByType (@PathVariable(value = "id") Integer id,
                                                        @RequestParam(name = "offset", required = false) Integer offset,
@@ -110,6 +142,11 @@ public class ProductController {
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
+    /**
+     * Add a product
+     * @param product product to add
+     * @return added product or UnableToInsertException error
+     */
     @PostMapping(value = "/products/add")
     public ResponseEntity<Product> add (@RequestBody Product product) {
         Product rProduct = null;
@@ -127,6 +164,11 @@ public class ProductController {
         return new ResponseEntity<>(rProduct, HttpStatus.CREATED);
     }
 
+    /**
+     * Update a product
+     * @param product product to update
+     * @return HttpResponse OK or UnableToUpdateException error
+     */
     @PutMapping(value = "/products/save")
     public ResponseEntity<Void> save (@RequestBody Product product) {
         try {
@@ -139,6 +181,11 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * Delete an product with an ID
+     * @param id product ID
+     * @return HttpResponse OK or UnableToDeleteException error
+     */
     @DeleteMapping(value = "/products/delete/{id}")
     public ResponseEntity<Void> delete (@PathVariable(name = "id") Integer id) {
         if (id == null || id < 0)

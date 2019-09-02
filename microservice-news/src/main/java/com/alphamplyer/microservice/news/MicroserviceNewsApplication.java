@@ -9,5 +9,4 @@ public class MicroserviceNewsApplication {
     public static void main(String[] args) {
         SpringApplication.run(MicroserviceNewsApplication.class, args);
     }
-
 }

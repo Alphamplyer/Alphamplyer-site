@@ -20,6 +20,12 @@ public class DAORepository  {
         namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
+    /**
+     * Returns the piece of an SQL query to limit or not the result according to the given parameters.
+     * @param offset from how many results does the selection start?
+     * @param limit how many results are expected at the maximum?
+     * @return A string representing a piece of SQL query
+     */
     protected String buildSQLOffsetLimit(Integer offset, Integer limit) {
         String sql = "";
 
@@ -29,6 +35,12 @@ public class DAORepository  {
         return sql.trim();
     }
 
+    /**
+     * Return a string with all element of the list join like that : (e1, e2, ..., e(n-1), e(n))
+     * @param list list of element
+     * @param <T> type of elements of the list
+     * @return a string with all element of the list join like that : (e1, e2, ..., e(n-1), e(n))
+     */
     protected <T> String listToSQLList(List<T> list) {
         StringBuilder sqlList = new StringBuilder("(");
 

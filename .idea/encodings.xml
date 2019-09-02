@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/microservice-news" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservice-orders" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservice-products" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservice-users" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservice-users-permissions" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/website-administration" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/website-main" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/website-main/src/main/resources/templates/menu.html" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/website-shop" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/website-shop/src/main/resources/templates/menu.html" charset="ISO-8859-1" />
+  </component>
+</project>

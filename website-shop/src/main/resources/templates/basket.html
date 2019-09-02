@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/basket_payment.css}">
+    <script src="https://kit.fontawesome.com/6bdf0d0706.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+    <title>Panier</title>
+</head>
+
+<body>
+<div th:replace="menu :: menu"></div>
+<header>
+    <h1>Panier</h1>
+</header>
+
+<div class="wrapper">
+<section class="basket-items">
+    <table>
+        <tr class="head-row">
+            <th>Nom</th>
+            <th>Référence</th>
+            <th>Nombre d'exemplaire</th>
+            <th>Disponibilité</th>
+        </tr>
+        <tr th:each="product : ${products}">
+            <td>
+            <a th:href="@{'/products/'+${product.product.id}}" th:text="${product.product.name}"></a></td>
+            <td th:text="${product.product.code}"></td>
+            <td th:text="${product.number}">Nombre d'exemplaire</td>
+            <td th:text="${product.product.status}">Disponibilité</td>
+        </tr>
+    </table>
+</section>
+<aside class="order-info">
+    <div class="order-info-container">
+        <h2>Prix du panier</h2>
+        <th:block th:each="product2 : ${products}">
+            <p class="price" th:text="${#numbers.formatDecimal(product2.product.price, 1, 2, 'COMMA')}+' € - '+${product2.product.name}"></p>
+        </th:block>
+        <p class="totalTVA" th:text="'Dont '+${#numbers.formatDecimal(totalTVA, 1, 2, 'COMMA')}+' € de TVA'"></p>
+        <p class="total" th:text="'Total '+${#numbers.formatDecimal(total, 1, 2, 'COMMA')}+' €'"></p>
+    </div>
+    <a th:href="@{/command}" class="btn">Commander</a>
+    <a th:href="@{/index}" class="btn">Continuer mes achats</a>
+</aside>
+</div>
+</body>
+</html>

@@ -36,6 +36,9 @@ public class ProfileController {
         this.microserviceUsersPermissionsProxy = microserviceUsersPermissionsProxy;
     }
 
+    /**
+     * Display profile page
+     */
     @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
     public String profileDisplay(Model model, @PathVariable(name = "id") Integer id) {
         User user;
@@ -58,6 +61,9 @@ public class ProfileController {
         return "profile";
     }
 
+    /*
+     * Display edit profile page
+     */
     @RequestMapping(value = "/profile/{id}/edit", method = RequestMethod.GET)
     public String profileEditDisplay(Model model, @PathVariable(name = "id") Integer id, HttpSession session) {
         User user;
@@ -88,6 +94,9 @@ public class ProfileController {
         return "editProfile";
     }
 
+    /**
+     * Edit user data and redirect user to the profile page. Don't edit the profile and show error if given data are wrong
+     */
     @RequestMapping(value = "/profile/{id}/edit", method = RequestMethod.POST)
     public ModelAndView profileEdit(@Valid @ModelAttribute UpdateUser updatedUser, BindingResult result, @PathVariable(name = "id") Integer id, HttpSession session) {
         User user;

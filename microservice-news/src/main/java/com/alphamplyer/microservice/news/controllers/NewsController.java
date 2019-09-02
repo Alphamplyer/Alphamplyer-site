@@ -8,6 +8,7 @@ import com.alphamplyer.microservice.news.models.News;
 import com.alphamplyer.microservice.news.models.NewsCategory;
 import com.alphamplyer.microservice.news.repositories.dao.interf.INewsCategoryRepository;
 import com.alphamplyer.microservice.news.repositories.dao.interf.INewsRepository;
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Deals with queries and returns the expected result
+ */
 @RestController
 public class NewsController {
 
@@ -39,6 +43,13 @@ public class NewsController {
 
     //region // --- < GET MAPPING > -------------------------------------------------------------------------------//
 
+
+    /**
+     * Return news by its ID
+     * @param id news ID
+     * @param includePublished does we search in all news (false), or in published (true)
+     * @return if founded, a news, else, a 404 error
+     */
     @GetMapping(value = "/news/{id}")
     public ResponseEntity<News> getNewsByID(@PathVariable(name = "id") Integer id,
                                             @RequestParam(name = "includePublished", required = false) Boolean includePublished) {
@@ -60,6 +71,13 @@ public class NewsController {
         return new ResponseEntity<>(news, HttpStatus.OK);
     }
 
+    /**
+     * Returns all news between offset and (offset + limit)
+     * @param offset defined from when to get news, set it to 0 or null avoid this parameters
+     * @param limit defines the number of news wanted from offset, set it to 0 or null avoid this parameters
+     * @param includePublished does we search in all news (false), or in published (true)
+     * @return a list of news or 404 error if not founded
+     */
     @GetMapping(value = "/news")
     public ResponseEntity<List<News>> getNews(@RequestParam(name = "offset", required = false) Integer offset,
                                               @RequestParam(name = "limit", required = false) Integer limit,
@@ -80,6 +98,14 @@ public class NewsController {
         return new ResponseEntity<>(news, HttpStatus.OK);
     }
 
+    /**
+     * Return all news between offset and (offset + limit) in a list of news of one category
+     * @param id category ID
+     * @param offset defined from when to get news, set it to 0 or null avoid this parameters
+     * @param limit defines the number of news wanted from offset, set it to 0 or null avoid this parameters
+     * @param includePublished does we search in all news (false), or in published (true)
+     * @return a list of news or 404 error if not founded
+     */
     @GetMapping(value = "/categories/{id}/news")
     public ResponseEntity<List<News>> getNewsOfCategory(@PathVariable(name = "id") Integer id,
                                                         @RequestParam(name = "offset", required = false) Integer offset,
@@ -101,6 +127,14 @@ public class NewsController {
         return new ResponseEntity<>(news, HttpStatus.OK);
     }
 
+    /**
+     * Return all news between offset and (offset + limit) in a list of news of one author
+     * @param id author ID
+     * @param offset defined from when to get news, set it to 0 or null avoid this parameters
+     * @param limit defines the number of news wanted from offset, set it to 0 or null avoid this parameters
+     * @param includePublished does we search in all news (false), or in published (true)
+     * @return a list of news or 404 error if not founded
+     */
     @GetMapping(value = "/news/author/{id}")
     public ResponseEntity<List<News>> getNewsOfAuthor(@PathVariable(name = "id") Integer id,
                                                       @RequestParam(name = "offset", required = false) Integer offset,
@@ -122,6 +156,11 @@ public class NewsController {
         return new ResponseEntity<>(news, HttpStatus.OK);
     }
 
+    /**
+     * Return a category from its ID
+     * @param id category ID
+     * @return a category or a 404 error if not founded
+     */
     @GetMapping(value = "/categories/{id}")
     public ResponseEntity<NewsCategory> getCategoryById(@PathVariable(name = "id") Integer id) {
         NewsCategory category;
@@ -140,6 +179,11 @@ public class NewsController {
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
+    /**
+     * Return the parent category from its child ID
+     * @param id child category ID
+     * @return a category or a 404 error if not founded
+     */
     @GetMapping(value = "/categories/{id}/parent")
     public ResponseEntity<NewsCategory> getParentCategoryById(@PathVariable(name = "id") Integer id) {
         NewsCategory category;
@@ -158,6 +202,11 @@ public class NewsController {
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
+    /**
+     * Get all child categories of one category
+     * @param id category ID
+     * @return a list of categories or a 404 error if not founded
+     */
     @GetMapping(value = "/categories/{id}/child")
     public ResponseEntity<List<NewsCategory>> getNewsCategoryChild(@PathVariable(name = "id") Integer id) {
         List<NewsCategory> categories;
@@ -176,6 +225,10 @@ public class NewsController {
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
+    /**
+     * Get main categories (categories that do not have a parent)
+     * @return a list of categories or a 404 error if not founded
+     */
     @GetMapping(value = "/categories/mains")
     public ResponseEntity<List<NewsCategory>> getMainCategories() {
         List<NewsCategory> categories;
@@ -198,6 +251,11 @@ public class NewsController {
 
     //region // --- < POST MAPPING > ------------------------------------------------------------------------------//
 
+    /**
+     * Ask to save a news in database
+     * @param news news to save
+     * @return the saved news or an internal error (5OO)
+     */
     @PostMapping("/news/save")
     public ResponseEntity<News> saveNews(@RequestBody News news) {
         News rNews;
@@ -216,6 +274,11 @@ public class NewsController {
         return new ResponseEntity<>(rNews, HttpStatus.CREATED);
     }
 
+    /**
+     * Ask to save a news category in database
+     * @param newsCategory news category to save
+     * @return the saved news category or an internal error (5OO)
+     */
     @PostMapping("/categories/save")
     public ResponseEntity<NewsCategory> saveNewsCategory(@RequestBody NewsCategory newsCategory) {
         NewsCategory rNewsCategory;
@@ -238,6 +301,12 @@ public class NewsController {
 
     //region // --- < PUT MAPPING > -------------------------------------------------------------------------------//
 
+    /**
+     * Ask to update a news
+     * @param id news id
+     * @param news new news data
+     * @return OK http status or Internal error if failed
+     */
     @PutMapping("/news/{id}/update")
     public ResponseEntity<Void> updateNews(@PathVariable(name = "id") Integer id, @RequestBody News news) {
 
@@ -251,6 +320,12 @@ public class NewsController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * Ask to update a news category
+     * @param id news category id
+     * @param newsCategory new news category data
+     * @return OK http status or Internal error if failed
+     */
     @PutMapping("/categories/{id}/update")
     public ResponseEntity<Void> updateNewsCategory(@PathVariable(name = "id") Integer id, @RequestBody NewsCategory newsCategory) {
 
@@ -268,8 +343,13 @@ public class NewsController {
 
     //region // --- < DELETE MAPPING > ----------------------------------------------------------------------------//
 
+    /**
+     * Ask to delete a news
+     * @param id news ID to delete
+     * @return OK http status or Internal error if failed
+     */
     @DeleteMapping("/news/{id}/delete")
-    public ResponseEntity<Void> updateNews(@PathVariable(name = "id") Integer id) {
+    public ResponseEntity<Void> deleteNews(@PathVariable(name = "id") Integer id) {
 
         try {
             newsRepository.delete(id);
@@ -281,8 +361,13 @@ public class NewsController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * Ask to delete a news category
+     * @param id news category ID to delete
+     * @return OK http status or Internal error if failed
+     */
     @DeleteMapping("/categories/{id}/delete")
-    public ResponseEntity<Void> updateNewsCategory(@PathVariable(name = "id") Integer id) {
+    public ResponseEntity<Void> deleteNewsCategory(@PathVariable(name = "id") Integer id) {
 
         try {
             newsCategoryRepository.delete(id);

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/microservice-users/pom.xml" />
+        <option value="$PROJECT_DIR$/website-main/pom.xml" />
+        <option value="$PROJECT_DIR$/microservice-users-permissions/pom.xml" />
+        <option value="$PROJECT_DIR$/microservice-news/pom.xml" />
+        <option value="$PROJECT_DIR$/microservice-products/pom.xml" />
+        <option value="$PROJECT_DIR$/website-shop/pom.xml" />
+        <option value="$PROJECT_DIR$/microservice-orders/pom.xml" />
+        <option value="$PROJECT_DIR$/website-administration/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

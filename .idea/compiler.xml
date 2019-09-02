@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="microservice-products" />
+        <module name="microservice-users-permissions" />
+        <module name="microservice-news" />
+        <module name="microservice-users" />
+        <module name="website-shop" />
+        <module name="website-administration" />
+        <module name="website-main" />
+        <module name="microservice-orders" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="microservice-news" target="1.8" />
+      <module name="microservice-orders" target="1.8" />
+      <module name="microservice-products" target="1.8" />
+      <module name="microservice-users" target="1.8" />
+      <module name="microservice-users-permissions" target="1.8" />
+      <module name="website-administration" target="1.8" />
+      <module name="website-main" target="1.8" />
+      <module name="website-shop" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="microservice-news" options="-parameters" />
+      <module name="microservice-orders" options="-parameters" />
+      <module name="microservice-products" options="-parameters" />
+      <module name="microservice-users" options="-parameters" />
+      <module name="microservice-users-permissions" options="-parameters" />
+      <module name="website-administration" options="-parameters" />
+      <module name="website-main" options="-parameters" />
+      <module name="website-shop" options="-parameters" />
+    </option>
+  </component>
+</project>

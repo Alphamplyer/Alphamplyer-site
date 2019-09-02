@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,14 +18,19 @@ public class OrderLineController {
 
     private static final Logger logger = LoggerFactory.getLogger(OrderLineController.class);
 
-    IOrderLineRepository orderLineRepository;
+    private IOrderLineRepository orderLineRepository;
 
     @Autowired
     public void setOrderLineRepository(IOrderLineRepository orderLineRepository) {
         this.orderLineRepository = orderLineRepository;
     }
 
-    
+    /**
+     * Get Order line from its ID
+     * @param id Order line ID
+     * @return an order line or 404 error if not founded
+     */
+    @GetMapping(value = "orders/lines/{id}")
     public ResponseEntity<OrderLine> getByID(@PathVariable(name = "id") Integer id) {
         if (id == null || id < 0)
             throw new BadRequestException("Order line ID is null or lower than 0");
@@ -44,6 +47,12 @@ public class OrderLineController {
         return new ResponseEntity<>(orderLine, HttpStatus.OK);
     }
 
+    /**
+     * Get order lines of an order
+     * @param id order ID
+     * @return list of order line or 404 error if not founded
+     */
+    @GetMapping(value = "orders/{id}/lines")
     public ResponseEntity<List<OrderLine>> getOrderLines(@PathVariable(name = "id") Integer id) {
         if (id == null || id < 0)
             throw new BadRequestException("User ID is null or lower than 0");
@@ -60,6 +69,12 @@ public class OrderLineController {
         return new ResponseEntity<>(orderLines, HttpStatus.OK);
     }
 
+    /**
+     * Add order line to an order
+     * @param orderLine order line data
+     * @return added order line or error 500
+     */
+    @PostMapping(value = "orders/line/add")
     public ResponseEntity<OrderLine> add (@RequestBody OrderLine orderLine) {
         OrderLine rOrderLine = null;
 
@@ -76,6 +91,12 @@ public class OrderLineController {
         return new ResponseEntity<>(rOrderLine, HttpStatus.CREATED);
     }
 
+    /**
+     * Add an order line to an order
+     * @param orderLines order lines data
+     * @return added order line or error 500
+     */
+    @PostMapping(value = "orders/lines/add")
     public ResponseEntity<Void> add(@RequestBody List<OrderLine> orderLines) {
         try {
             orderLineRepository.add(orderLines);
@@ -87,6 +108,12 @@ public class OrderLineController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    /**
+     * Save an order line to an order
+     * @param orderLine order lines data
+     * @return OK httpCode line or error 500
+     */
+    @PutMapping(value = "orders/line/save")
     public ResponseEntity<Void> save (@RequestBody OrderLine orderLine) {
         try {
             orderLineRepository.save(orderLine);
@@ -98,6 +125,12 @@ public class OrderLineController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * Delete an order line from its ID
+     * @param id order lines ID
+     * @return OK httpCode line or error 500
+     */
+    @DeleteMapping(value = "orders/line/delete")
     public ResponseEntity<Void> delete (@PathVariable(name = "id") Integer id) {
         if (id == null || id < 0)
             throw new BadRequestException("Order Line ID is null or lower than 0");

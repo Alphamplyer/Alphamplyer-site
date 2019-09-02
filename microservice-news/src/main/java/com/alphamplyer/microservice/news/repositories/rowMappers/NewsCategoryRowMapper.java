@@ -6,6 +6,9 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Row Mapper of News Category Data
+ */
 public class NewsCategoryRowMapper implements RowMapper<NewsCategory> {
 
     @Override

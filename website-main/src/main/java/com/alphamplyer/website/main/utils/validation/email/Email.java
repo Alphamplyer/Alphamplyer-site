@@ -15,6 +15,11 @@ public class Email {
     private static final String regex_secondPart_1 = "(?:[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]\\.)+[a-zA-Z]{2,7}";
     private static final String regex_secondPart_2 = "\\[?+(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\]?+";
 
+    /**
+     * Verify if email is valid
+     * @param email email to verify
+     * @return true if valid, false else
+     */
     public static boolean isValid(String email) {
         if (email == null)
             return false;

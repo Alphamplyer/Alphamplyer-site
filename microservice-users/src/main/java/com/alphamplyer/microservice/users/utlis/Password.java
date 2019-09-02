@@ -9,8 +9,9 @@ import java.util.Random;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
-// Get this code at : http://appsdeveloperblog.com/encrypt-user-password-example-java/
+// Get the original code at : http://appsdeveloperblog.com/encrypt-user-password-example-java/
 // To secure password in database
+// this class has been a little modify to correspond with the project
 
 public class Password {
 
