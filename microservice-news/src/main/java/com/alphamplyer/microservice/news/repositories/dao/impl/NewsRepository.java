@@ -13,15 +13,16 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
 public class NewsRepository extends DAORepository implements INewsRepository {
 
     @Override
-    public News getById(Integer id, Boolean includeNotPublished) {
+    public News getById(Integer id, Boolean getOnlyPublished) {
         String sql = "SELECT * FROM news WHERE id = :id"
-            + buildSQLCondition(includeNotPublished, " AND publication_time < NOW()");
+            + buildSQLCondition(getOnlyPublished, " AND publication_time < NOW()");
 
         RowMapper<News> rowMapper = new NewsRowMapper();
 
@@ -40,9 +41,9 @@ public class NewsRepository extends DAORepository implements INewsRepository {
     }
 
     @Override
-    public List<News> getNews(Integer offset, Integer limit, Boolean includeNotPublished) {
+    public List<News> getNews(Integer offset, Integer limit, Boolean getOnlyPublished) {
         String sql = "SELECT * FROM news "
-            + buildSQLCondition(includeNotPublished, "WHERE publication_time < NOW()")
+            + buildSQLCondition(getOnlyPublished, "WHERE publication_time < NOW()")
             + " ORDER BY publication_time DESC "
             + buildSQLOffsetLimit(offset, limit);
 
@@ -73,7 +74,7 @@ public class NewsRepository extends DAORepository implements INewsRepository {
     }
 
     @Override
-    public List<News> getNewsByCategoryId(Integer categoryId, Integer offset, Integer limit, Boolean includeNotPublished) {
+    public List<News> getNewsByCategoryId(Integer categoryId, Integer offset, Integer limit, Boolean getOnlyPublished) {
         String sql = "WITH RECURSIVE category_collection AS ( " +
             "SELECT id, parent_id " +
             "FROM news_categories " +
@@ -83,7 +84,7 @@ public class NewsRepository extends DAORepository implements INewsRepository {
             "JOIN category_collection ON category_collection.id = nc.parent_id " +
             ") " +
             "SELECT n.* FROM news n, category_collection c WHERE n.category_id = c.id "
-            + buildSQLCondition(includeNotPublished, " AND publication_time < NOW()")
+            + buildSQLCondition(getOnlyPublished, " AND publication_time < NOW()")
             + " ORDER BY publication_time DESC "
             + buildSQLOffsetLimit(offset, limit);
 
@@ -101,9 +102,9 @@ public class NewsRepository extends DAORepository implements INewsRepository {
     }
 
     @Override
-    public List<News> getNewsByAuthorId(Integer authorId, Integer offset, Integer limit, Boolean includeNotPublished) {
+    public List<News> getNewsByAuthorId(Integer authorId, Integer offset, Integer limit, Boolean getOnlyPublished) {
         String sql = "SELECT n.* FROM news n, news_authors na WHERE na.news_id = n.id AND na.author_id = :authorId "
-            + buildSQLCondition(includeNotPublished, " AND publication_time < NOW()")
+            + buildSQLCondition(getOnlyPublished, " AND publication_time < NOW()")
             + " ORDER BY publication_time DESC "
             + buildSQLOffsetLimit(offset, limit);
 
@@ -144,11 +145,14 @@ public class NewsRepository extends DAORepository implements INewsRepository {
 
         namedParameterJdbcTemplate.update(sql_news, params_news, keyHolder);
 
-        if (keyHolder.getKey() == null) {
-            return null;
-        }
+        HashMap<String, Object> keys;
 
-        news.setId(keyHolder.getKey().longValue());
+        if (keyHolder.getKeys() != null)
+            keys = new HashMap<String, Object>(keyHolder.getKeys());
+        else
+            return null;
+
+        news.setId((long)keys.get("id"));
         news.setCreatedAt(now);
         news.setUpdatedAt(now);
 
@@ -166,14 +170,15 @@ public class NewsRepository extends DAORepository implements INewsRepository {
     }
 
     @Override
-    public void update(Integer id, News news) {
+    public void update(News news) {
         String sql = "UPDATE news SET category_id = :category_id, main_image_id = :main_image_id , title = :title, " +
-            "content = :content, description = :description, updated_at = :updated_at WHERE id = :id";
+            "content = :content, description = :description, publication_time = :publication_time, updated_at = :updated_at WHERE id = :id";
 
         Timestamp now = new Timestamp(System.currentTimeMillis());
 
         MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("id", id);
+        params.addValue("id", news.getId());
+        params.addValue("publication_time", news.getPublicationTime());
         params.addValue("category_id", news.getCategoryId());
         params.addValue("main_image_id", news.getMainImageId());
         params.addValue("title", news.getTitle());

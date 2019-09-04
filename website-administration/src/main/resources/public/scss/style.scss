@@ -1,0 +1,30 @@
+// --- < VARIABLES > ---------------------------------------- //
+
+
+
+// --- < IMPORT > ------------------------------------------- //
+
+@import "base/base_imports";
+@import "modules/menu";
+@import "modules/table";
+@import "modules/inputs";
+@import "modules/color";
+
+// --- < SCSS > --------------------------------------------- //
+
+.img {
+    background-size: cover !important;
+    background-position: center !important;
+    width: 100%;
+    content: "";
+    height: 250px;
+    margin-bottom: 20px;
+}
+
+a {
+    color: #222222;
+
+    &:hover {
+        color: $color_primary;
+    }
+}

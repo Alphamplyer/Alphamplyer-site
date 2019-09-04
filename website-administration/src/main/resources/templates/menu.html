@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="menu" class="menus">
+        <div class="menu">
+            <ul>
+                <li>
+                    <a th:href="@{/news}">Actualité</a>
+                </li>
+                <li>
+                    <a th:href="@{/shop}">Boutique</a>
+                    <ul class="submenu">
+                        <li><a th:href="@{/shop/products}">Produits</a></li>
+                        <li><a th:href="@{/shop/productTypes}">Catégories de produit</a></li>
+                        <li><a th:href="@{/shop/reductions}">Réductions</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/users}">Utilisateur</a>
+                </li>
+            </ul>
+        </div>
+        <div class="login-menu">
+            <ul>
+                <!-- if logged in -->
+                <li>
+                    <a class="btn" th:href="@{/logout}">Déconnexion</a>
+                </li>
+                <li>
+                    <p th:text="'Connecté en temps que ' + ${session.user.username}"></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

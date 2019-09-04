@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://kit.fontawesome.com/6bdf0d0706.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+    <title>Title</title>
+</head>
+
+<body>
+<div th:replace="menu :: menu"></div>
+
+<div class="container">
+
+    <a th:href="@{/shop/products/new}" class="btn">Nouveau</a>
+
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Disponible du</th>
+            <th>Au</th>
+            <th>Prix</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.name}"></td>
+            <td th:text="${#dates.format(product.availableFrom, 'dd/MM/yyyy - hh:mm')}"></td>
+            <td th:if="${product.availableTo != null}" th:text="${#dates.format(product.availableTo, 'dd/MM/yyyy - hh:mm')}"></td>
+            <td th:if="${product.availableTo == null}">Pas de fin</td>
+            <td th:text="${product.price} + ' €'"></td>
+            <td class="btn-cell">
+                <a th:href="@{'/shop/products/edit/' + ${product.id}}" class="btn btn-edit">Modifier</a>
+                <a th:href="@{'/shop/products/delete/' + ${product.id}}" class="btn btn-delete" onclick="return confirm('Voulez-vous vraiment effectuer cette action ?')">Supprimer</a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

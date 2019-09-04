@@ -1,0 +1,51 @@
+table {
+    width: 100%;
+}
+
+tr {
+    height: 35px;
+    vertical-align: middle;
+    text-align: center;
+
+    background-color: #eeeeee;
+
+    &:nth-child(2n+1) {
+        background-color: #dddddd;
+    }
+
+    .btn {
+        color: #222222;
+
+        margin: 7px;
+        padding: 2px 5px 3px 5px;
+
+        height: 26px;
+        line-height: 26px;
+
+        @include border-radius(3px);
+        @include transition(background-color, 0.3s, ease);
+
+        &:hover {
+            background-color: #222222;
+            color: #fff;
+        }
+    }
+
+    .btn-delete {
+        color: #fff;
+        background-color: #fd1e00;
+
+        &:hover {
+            background-color: #ac1905;
+        }
+    }
+
+    .btn-edit {
+        color: #fff;
+        background-color: #4168b4;
+
+        &:hover {
+            background-color: #254688;
+        }
+    }
+}

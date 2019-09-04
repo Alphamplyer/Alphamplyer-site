@@ -120,7 +120,7 @@ public class NewsCategoryRepository extends DAORepository implements INewsCatego
     }
 
     @Override
-    public void update(Integer id, NewsCategory category) {
+    public void update(NewsCategory category) {
         String sql = "UPDATE news_categories " +
             "SET parent_id = :parent_id, name = :name, description = :description, updated_at = :updated_at " +
             "WHERE id = :id";
@@ -128,7 +128,7 @@ public class NewsCategoryRepository extends DAORepository implements INewsCatego
         Timestamp now = new Timestamp(System.currentTimeMillis());
 
         MapSqlParameterSource params_news = new MapSqlParameterSource();
-        params_news.addValue("id", id);
+        params_news.addValue("id", category.getId());
         params_news.addValue("parent_id", category.getParentId());
         params_news.addValue("name", category.getName());
         params_news.addValue("description", category.getDescription());

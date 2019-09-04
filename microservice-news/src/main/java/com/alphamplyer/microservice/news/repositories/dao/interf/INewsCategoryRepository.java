@@ -42,10 +42,9 @@ public interface INewsCategoryRepository {
 
     /**
      * update a news category
-     * @param id news category ID to update
      * @param category news category data
      */
-    void update(Integer id, NewsCategory category);
+    void update(NewsCategory category);
 
     /**
      * delete a news category

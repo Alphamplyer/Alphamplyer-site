@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://kit.fontawesome.com/6bdf0d0706.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+    <title>Nouveau</title>
+</head>
+
+<body>
+<div th:replace="menu :: menu"></div>
+
+<div class="container">
+
+    <form th:action="@{/news/new}" th:object="${news}" method="post">
+        <p>Titre</p>
+        <input type="text" th:field="${news.title}" name="title" id="title">
+        <label class="red" for="title" th:each="error: ${#fields.errors('title')}" th:text="${error}"></label>
+
+        <p>Date de publication (format année-mois-jour heure:minute:seconde.miliseconde)</p>
+        <input type="text" th:field="${news.publicationTime}" name="publicationTime" id="publicationTime" placeholder="année-mois-jour heure:minute:seconde:miliseconde">
+        <label class="red" for="publicationTime" th:each="error: ${#fields.errors('publicationTime')}" th:text="${error}"></label>
+
+        <p>Description (Peut-être vide)</p>
+        <textarea th:field="${news.description}" name="description" id="description" cols="30" rows="10"></textarea>
+        <label class="red" for="description" th:each="error: ${#fields.errors('description')}" th:text="${error}"></label>
+
+        <p>Contenu</p>
+        <textarea th:field="${news.content}" name="content" id="content" cols="30" rows="10"></textarea>
+        <label class="red" for="content" th:each="error: ${#fields.errors('content')}" th:text="${error}"></label>
+
+        <input type="submit" value="Enregistrer">
+        <a th:href="@{/news}" class="btn-form-cancel">Annuler</a>
+    </form>
+</div>
+</body>
+</html>

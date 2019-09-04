@@ -16,51 +16,51 @@ public interface MicroserviceNewsProxy {
     /**
      * Return news by its ID
      * @param id news ID
-     * @param includePublished does we search in all news (false), or in published (true)
+     * @param getOnlyPublished get only published (true), else get all (false)
      * @return if founded, a news, else, a 404 error
      */
     @GetMapping(value = "/news/{id}")
-    News getNewsByID(@PathVariable(name = "id") Integer id, @RequestParam(name = "includePublished", required = false) Boolean includePublished);
+    News getNewsByID(@PathVariable(name = "id") Integer id, @RequestParam(name = "getOnlyPublished", required = false) Boolean getOnlyPublished);
 
     /**
      * Returns all news between offset and (offset + limit)
      * @param offset defined from when to get news, set it to 0 or null avoid this parameters
      * @param limit defines the number of news wanted from offset, set it to 0 or null avoid this parameters
-     * @param includePublished does we search in all news (false), or in published (true)
+     * @param getOnlyPublished get only published (true), else get all (false)
      * @return a list of news or 404 error if not founded
      */
     @GetMapping(value = "/news")
     List<News> getNews(@RequestParam(name = "offset", required = false) Integer offset,
                        @RequestParam(name = "limit", required = false) Integer limit,
-                       @RequestParam(name = "includePublished", required = false) Boolean includePublished);
+                       @RequestParam(name = "getOnlyPublished", required = false) Boolean getOnlyPublished);
 
     /**
      * Return all news between offset and (offset + limit) in a list of news of one category
      * @param id category ID
      * @param offset defined from when to get news, set it to 0 or null avoid this parameters
      * @param limit defines the number of news wanted from offset, set it to 0 or null avoid this parameters
-     * @param includePublished does we search in all news (false), or in published (true)
+     * @param getOnlyPublished get only published (true), else get all (false)
      * @return a list of news or 404 error if not founded
      */
     @GetMapping(value = "/categories/{id}/news")
     List<News> getNewsOfCategory(@PathVariable(name = "id") Integer id,
                                  @RequestParam(name = "offset", required = false) Integer offset,
                                  @RequestParam(name = "limit", required = false) Integer limit,
-                                 @RequestParam(name = "includePublished", required = false) Boolean includePublished);
+                                 @RequestParam(name = "getOnlyPublished", required = false) Boolean getOnlyPublished);
 
     /**
      * Return all news between offset and (offset + limit) in a list of news of one author
      * @param id author ID
      * @param offset defined from when to get news, set it to 0 or null avoid this parameters
      * @param limit defines the number of news wanted from offset, set it to 0 or null avoid this parameters
-     * @param includePublished does we search in all news (false), or in published (true)
+     * @param getOnlyPublished get only published (true), else get all (false)
      * @return a list of news or 404 error if not founded
      */
     @GetMapping(value = "/news/author/{id}")
     List<News> getNewsOfAuthor(@PathVariable(name = "id") Integer id,
                                @RequestParam(name = "offset", required = false) Integer offset,
                                @RequestParam(name = "limit", required = false) Integer limit,
-                               @RequestParam(name = "includePublished", required = false) Boolean includePublished);
+                               @RequestParam(name = "getOnlyPublished", required = false) Boolean getOnlyPublished);
 
     /**
      * Return a category from its ID
@@ -119,21 +119,19 @@ public interface MicroserviceNewsProxy {
 
     /**
      * Ask to update a news
-     * @param id news id
      * @param news new news data
      * @return OK http status or Internal error if failed
      */
-    @PutMapping("/news/{id}/update")
-    Void updateNews(@PathVariable(name = "id") Integer id, @RequestBody News news);
+    @PutMapping("/news/update")
+    Void updateNews(@RequestBody News news);
 
     /**
      * Ask to update a news category
-     * @param id news category id
      * @param newsCategory new news category data
      * @return OK http status or Internal error if failed
      */
-    @PutMapping("/categories/{id}/update")
-    Void updateNewsCategory(@PathVariable(name = "id") Integer id, @RequestBody NewsCategory newsCategory);
+    @PutMapping("/categories/update")
+    Void updateNewsCategory(@RequestBody NewsCategory newsCategory);
 
     //endregion
 
@@ -145,7 +143,7 @@ public interface MicroserviceNewsProxy {
      * @return OK http status or Internal error if failed
      */
     @DeleteMapping("/news/{id}/delete")
-    Void updateNews(@PathVariable(name = "id") Integer id);
+    Void deleteNews(@PathVariable(name = "id") Integer id);
 
     /**
      * Ask to delete a news category
@@ -153,7 +151,7 @@ public interface MicroserviceNewsProxy {
      * @return OK http status or Internal error if failed
      */
     @DeleteMapping("/categories/{id}/delete")
-    Void updateNewsCategory(@PathVariable(name = "id") Integer id);
+    Void deleteNewsCategory(@PathVariable(name = "id") Integer id);
 
     //endregion
 }

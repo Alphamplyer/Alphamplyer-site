@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://kit.fontawesome.com/6bdf0d0706.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+    <title>Title</title>
+</head>
+
+<body>
+<div th:replace="menu :: menu"></div>
+
+<div class="container">
+    <img src="" alt="">
+
+    <form th:action="@{'/shop/products/edit/' + ${product.id}}" method="post">
+        <p>Nom</p>
+        <input type="text" th:field="${product.name}" name="name" id="name">
+
+        <p>Code du Produit</p>
+        <input type="text" th:field="${product.code}" name="code" id="code">
+
+        <p>Prix du Produit</p>
+        <input type="text" th:field="${product.price}" name="price" id="price">
+
+        <p>Disponible du (format année-mois-jour heure:minute:seconde.miliseconde)</p>
+        <input type="text" th:field="${product.availableFrom}" name="availableFrom" id="availableFrom" placeholder="année-mois-jour heure:minute:seconde:miliseconde">
+
+        <p>Au (format année-mois-jour heure:minute:seconde.miliseconde) (Peut-être null)</p>
+        <input type="text" th:field="${product.availableTo}" name="availableTo" id="availableTo" placeholder="année-mois-jour heure:minute:seconde:miliseconde">
+
+        <p>Description (Peut-être null)</p>
+        <textarea th:field="${product.description}" name="description" id="description" cols="30" rows="10"></textarea>
+
+        <input type="submit" value="Enregistrer">
+        <a th:href="@{/shop/products}" class="btn-form-cancel">Annuler</a>
+    </form>
+</div>
+
+</body>
+</html>

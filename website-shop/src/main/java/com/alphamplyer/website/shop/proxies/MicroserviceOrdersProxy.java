@@ -127,7 +127,7 @@ public interface MicroserviceOrdersProxy {
      * Delete an order line from its ID
      * @param id order lines ID
      */
-    @DeleteMapping(value = "orders/line/delete")
+    @DeleteMapping(value = "orders/line/{id}/delete")
     void delete (@PathVariable(name = "id") Integer id);
 
     //endregion

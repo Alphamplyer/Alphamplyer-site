@@ -8,7 +8,6 @@ import com.alphamplyer.microservice.news.models.News;
 import com.alphamplyer.microservice.news.models.NewsCategory;
 import com.alphamplyer.microservice.news.repositories.dao.interf.INewsCategoryRepository;
 import com.alphamplyer.microservice.news.repositories.dao.interf.INewsRepository;
-import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,16 +46,16 @@ public class NewsController {
     /**
      * Return news by its ID
      * @param id news ID
-     * @param includePublished does we search in all news (false), or in published (true)
+     * @param getOnlyPublished get only published (true), else get all (false)
      * @return if founded, a news, else, a 404 error
      */
     @GetMapping(value = "/news/{id}")
     public ResponseEntity<News> getNewsByID(@PathVariable(name = "id") Integer id,
-                                            @RequestParam(name = "includePublished", required = false) Boolean includePublished) {
+                                            @RequestParam(name = "getOnlyPublished", required = false) Boolean getOnlyPublished) {
         News news;
 
         try {
-            news = newsRepository.getById(id, includePublished);
+            news = newsRepository.getById(id, getOnlyPublished);
             List<Integer> IDs = newsRepository.getNewsAuthor(news.getId());
             news.setAuthors(IDs);
         } catch (DataAccessException e) {
@@ -75,17 +74,17 @@ public class NewsController {
      * Returns all news between offset and (offset + limit)
      * @param offset defined from when to get news, set it to 0 or null avoid this parameters
      * @param limit defines the number of news wanted from offset, set it to 0 or null avoid this parameters
-     * @param includePublished does we search in all news (false), or in published (true)
+     * @param getOnlyPublished get only published (true), else get all (false)
      * @return a list of news or 404 error if not founded
      */
     @GetMapping(value = "/news")
     public ResponseEntity<List<News>> getNews(@RequestParam(name = "offset", required = false) Integer offset,
                                               @RequestParam(name = "limit", required = false) Integer limit,
-                                              @RequestParam(name = "includePublished", required = false) Boolean includePublished) {
+                                              @RequestParam(name = "getOnlyPublished", required = false) Boolean getOnlyPublished) {
         List<News> news;
 
         try {
-            news = newsRepository.getNews(offset, limit, includePublished);
+            news = newsRepository.getNews(offset, limit, getOnlyPublished);
         } catch (DataAccessException e) {
             logger.error("News not found", e);
             news = null;
@@ -103,18 +102,18 @@ public class NewsController {
      * @param id category ID
      * @param offset defined from when to get news, set it to 0 or null avoid this parameters
      * @param limit defines the number of news wanted from offset, set it to 0 or null avoid this parameters
-     * @param includePublished does we search in all news (false), or in published (true)
+     * @param getOnlyPublished get only published (true), else get all (false)
      * @return a list of news or 404 error if not founded
      */
     @GetMapping(value = "/categories/{id}/news")
     public ResponseEntity<List<News>> getNewsOfCategory(@PathVariable(name = "id") Integer id,
                                                         @RequestParam(name = "offset", required = false) Integer offset,
                                                         @RequestParam(name = "limit", required = false) Integer limit,
-                                                        @RequestParam(name = "includePublished", required = false) Boolean includePublished) {
+                                                        @RequestParam(name = "getOnlyPublished", required = false) Boolean getOnlyPublished) {
         List<News> news;
 
         try {
-            news = newsRepository.getNewsByCategoryId(id, offset, limit, includePublished);
+            news = newsRepository.getNewsByCategoryId(id, offset, limit, getOnlyPublished);
         } catch (DataAccessException e) {
             logger.error("News not found in category", e);
             news = null;
@@ -132,18 +131,18 @@ public class NewsController {
      * @param id author ID
      * @param offset defined from when to get news, set it to 0 or null avoid this parameters
      * @param limit defines the number of news wanted from offset, set it to 0 or null avoid this parameters
-     * @param includePublished does we search in all news (false), or in published (true)
+     * @param getOnlyPublished get only published (true), else get all (false)
      * @return a list of news or 404 error if not founded
      */
     @GetMapping(value = "/news/author/{id}")
     public ResponseEntity<List<News>> getNewsOfAuthor(@PathVariable(name = "id") Integer id,
                                                       @RequestParam(name = "offset", required = false) Integer offset,
                                                       @RequestParam(name = "limit", required = false) Integer limit,
-                                                      @RequestParam(name = "includePublished", required = false) Boolean includePublished) {
+                                                      @RequestParam(name = "getOnlyPublished", required = false) Boolean getOnlyPublished) {
         List<News> news;
 
         try {
-            news = newsRepository.getNewsByAuthorId(id, offset, limit, includePublished);
+            news = newsRepository.getNewsByAuthorId(id, offset, limit, getOnlyPublished);
         } catch (DataAccessException e) {
             logger.error("News not found in author's written news", e);
             news = null;
@@ -303,18 +302,17 @@ public class NewsController {
 
     /**
      * Ask to update a news
-     * @param id news id
      * @param news new news data
      * @return OK http status or Internal error if failed
      */
-    @PutMapping("/news/{id}/update")
-    public ResponseEntity<Void> updateNews(@PathVariable(name = "id") Integer id, @RequestBody News news) {
+    @PutMapping("/news/update")
+    public ResponseEntity<Void> updateNews(@RequestBody News news) {
 
         try {
-            newsRepository.update(id, news);
+            newsRepository.update(news);
         } catch (DataAccessException e) {
             logger.error("Failed to update", e);
-            throw new UnableToUpdateException("Failed to update news with ID = " + id);
+            throw new UnableToUpdateException("Failed to update news with ID = " + news.getId());
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -322,18 +320,17 @@ public class NewsController {
 
     /**
      * Ask to update a news category
-     * @param id news category id
      * @param newsCategory new news category data
      * @return OK http status or Internal error if failed
      */
-    @PutMapping("/categories/{id}/update")
-    public ResponseEntity<Void> updateNewsCategory(@PathVariable(name = "id") Integer id, @RequestBody NewsCategory newsCategory) {
+    @PutMapping("/categories/update")
+    public ResponseEntity<Void> updateNewsCategory(@RequestBody NewsCategory newsCategory) {
 
         try {
-            newsCategoryRepository.update(id, newsCategory);
+            newsCategoryRepository.update(newsCategory);
         } catch (DataAccessException e) {
             logger.error("Failed to update", e);
-            throw new UnableToUpdateException("Failed to update news category with ID = " + id);
+            throw new UnableToUpdateException("Failed to update news category with ID = " + newsCategory.getId());
         }
 
         return new ResponseEntity<>(HttpStatus.OK);

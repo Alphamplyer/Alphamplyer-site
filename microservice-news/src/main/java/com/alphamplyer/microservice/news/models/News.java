@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 /**
- * Data of news
+ * News Data
  */
 public class News {
 

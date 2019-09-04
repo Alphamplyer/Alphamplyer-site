@@ -9,37 +9,37 @@ public interface INewsRepository {
     /**
      * Return news by its ID
      * @param id news ID
-     * @param includeNotPublished does we search in all news (true), or in published (false)
+     * @param getOnlyPublished get only published (true), else get all (false)
      * @return a news
      */
-    News getById(Integer id, Boolean includeNotPublished);
+    News getById(Integer id, Boolean getOnlyPublished);
 
     /**
      * Return a list of news
      * @param offset defined from when to get news, set it to 0 or null avoid this parameters
      * @param limit defines the number of news wanted from offset, set it to 0 or null avoid this parameters
-     * @param includeNotPublished does we search in all news (true), or in published (false)
+     * @param getOnlyPublished get only published (true), else get all (false)
      * @return a list of news
      */
-    List<News> getNews(Integer offset, Integer limit, Boolean includeNotPublished);
+    List<News> getNews(Integer offset, Integer limit, Boolean getOnlyPublished);
 
     /**
      * Return a list of news by category ID
      * @param offset defined from when to get news, set it to 0 or null avoid this parameters
      * @param limit defines the number of news wanted from offset, set it to 0 or null avoid this parameters
-     * @param includeNotPublished does we search in all news (true), or in published (false)
+     * @param getOnlyPublished get only published (true), else get all (false)
      * @return a list of news
      */
-    List<News> getNewsByCategoryId(Integer categoryId, Integer offset, Integer limit, Boolean includeNotPublished);
+    List<News> getNewsByCategoryId(Integer categoryId, Integer offset, Integer limit, Boolean getOnlyPublished);
 
     /**
      * Return a list of news by author ID
      * @param offset defined from when to get news, set it to 0 or null avoid this parameters
      * @param limit defines the number of news wanted from offset, set it to 0 or null avoid this parameters
-     * @param includeNotPublished does we search in all news (true), or in published (false)
+     * @param getOnlyPublished get only published (true), else get all (false)
      * @return a list of news
      */
-    List<News> getNewsByAuthorId(Integer authorId, Integer offset, Integer limit, Boolean includeNotPublished);
+    List<News> getNewsByAuthorId(Integer authorId, Integer offset, Integer limit, Boolean getOnlyPublished);
 
     /**
      * Get list of author from news ID
@@ -57,10 +57,9 @@ public interface INewsRepository {
 
     /**
      * Update news from its ID
-     * @param id news ID
      * @param news news data
      */
-    void update(Integer id, News news);
+    void update(News news);
 
     /**
      * Delete news from its ID

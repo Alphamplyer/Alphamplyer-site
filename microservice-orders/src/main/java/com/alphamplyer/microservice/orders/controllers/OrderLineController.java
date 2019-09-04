@@ -130,7 +130,7 @@ public class OrderLineController {
      * @param id order lines ID
      * @return OK httpCode line or error 500
      */
-    @DeleteMapping(value = "orders/line/delete")
+    @DeleteMapping(value = "orders/line/{id}/delete")
     public ResponseEntity<Void> delete (@PathVariable(name = "id") Integer id) {
         if (id == null || id < 0)
             throw new BadRequestException("Order Line ID is null or lower than 0");

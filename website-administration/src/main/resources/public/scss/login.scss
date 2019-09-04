@@ -1,0 +1,136 @@
+// --- < VARIABLES > ---------------------------------------- //
+
+
+
+// --- < IMPORT > ------------------------------------------- //
+
+@import "base/base_imports";
+
+// --- < SCSS > --------------------------------------------- //
+
+body {
+    background: #FFF;
+    color: $color_input-foreground;
+    font: 87.5%/1.5em 'Open Sans', sans-serif;
+    margin: 0;
+}
+
+a {
+    color: #ee8764;
+    text-decoration: none;
+    margin: 0 3px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+input {
+    border: none;
+    font-size: 14px;
+    line-height: 1.5em;
+    padding: 0;
+    -webkit-appearance: none;
+}
+
+p {
+    line-height: 1.5em;
+}
+
+.l-container {
+    left: 50%;
+    position: fixed;
+    top: 50%;
+    @include translate(-50%, -50%);
+}
+
+#form-container {
+    width: 280px;
+}
+
+#form-container p {
+    margin-top: 1em;
+}
+
+#form-container form span {
+    background-color: #363b41;
+    @include border-radius(3px 0 0 3px);
+    color: #9ea2a6;
+    display: block;
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    width: 50px;
+}
+
+#form-container label {
+    color: #ff6f70;
+}
+
+#form-container form input {
+    height: 50px;
+}
+
+#form-container form input[type="text"], input[type="password"], input[type="email"] {
+    background-color: #3b4148;
+    @include border-radius(0px 3px 3px 0px);
+    color: #9ea2a6;
+    padding: 0 16px;
+    width: 230px;
+
+    &::placeholder {
+        color: #85898d;
+    }
+}
+
+#form-container form input[type="submit"] {
+    @include border-radius(3px);
+    background-color: $color_primary;
+    color: #eee;
+    font-weight: bold;
+    margin: 1em 0 2em 0;
+    text-transform: uppercase;
+    width: 280px;
+}
+
+#form-container form input[type="submit"]:hover {
+    background-color: #ff5845;
+}
+
+#form-container > p {
+    text-align: center;
+}
+
+#form-container > p span {
+    padding-left: 5px;
+}
+
+#form-container fieldset {
+    border: none;
+}
+
+#form-container .check-box {
+
+    text-align: center;
+
+    input[type="checkbox"] {
+        -webkit-appearance: checkbox;
+        position: relative;
+        top: 5px;
+
+        width: 20px;
+        height: 20px;
+
+        margin-right: 5px;
+
+        background-color: #222222;
+
+        @include border-radius(3px);
+    }
+
+    label {
+        color: #5a5a5a;
+    }
+}
+

@@ -1,0 +1,96 @@
+// --- < VARIABLES > ---------------------------------------- //
+
+$horizontal_menu_height: 40px;
+$vertical_menu_width: 250px;
+
+// --- < SCSS > --------------------------------------------- //
+
+.menus {
+
+    a, p {
+        display: block;
+        height: $horizontal_menu_height;
+        line-height: $horizontal_menu_height;
+        color: $color_in-text-link;
+        @include transition(background-color, 0.3s, ease);
+    }
+
+    a:hover {
+        color: $color_in-text-link-hover;
+        background-color: #dddddd;
+    }
+}
+
+.menu {
+
+    position: fixed;
+
+    width: $vertical_menu_width;
+    height: 100vh;
+
+    padding-top: $horizontal_menu_height;
+
+    overflow: hidden;
+
+    background-color: #eeeeee;
+
+    li, a {
+        width: 100%;
+    }
+
+    a {
+        padding-left: 15px;
+    }
+
+    .submenu {
+        a {
+            height: 30px;
+            line-height: 30px;
+
+            padding-left: 30px;
+        }
+    }
+}
+
+.login-menu {
+    position: fixed;
+
+    overflow: hidden;
+
+    width: 100%;
+    height: $horizontal_menu_height;
+
+    background-color: #cccccc;
+
+    li {
+        float: right;
+    }
+
+    a.btn {
+        border: 2px solid #222222;
+        color: #222222;
+
+        margin: 7px 7px 7px 15px ;
+        padding: 0 5px;
+
+        height: 26px;
+        line-height: 22px;
+
+        @include border-radius(3px);
+        @include transition(background-color, 0.3s, ease);
+
+        &:hover {
+            background-color: #222222;
+            color: #fff;
+        }
+
+    }
+}
+
+.menu, .login-menu {
+    top: 0;
+}
+
+.container {
+    margin: ($horizontal_menu_height + 10px) 10px 0 ($vertical_menu_width + 10px);
+}
