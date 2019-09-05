@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @RestController
 public class RoleController {
@@ -38,10 +40,28 @@ public class RoleController {
         try {
             role = roleRepository.getById(id);
         } catch (DataAccessException e) {
-            logger.error("User not found in database", e);
-            throw new NotFoundException(String.format("User not found (ID = %d)", id));
+            logger.error("Role not found in database", e);
+            throw new NotFoundException(String.format("Role not found (ID = %d)", id));
         }
 
         return new ResponseEntity<>(role, HttpStatus.OK);
+    }
+
+    /**
+     * Get all roles
+     * @return roles list or a NotFoundException error
+     */
+    @GetMapping(value = "/roles")
+    public ResponseEntity<List<Role>> getRoles() {
+        List<Role> roles;
+
+        try {
+            roles = roleRepository.getRoles();
+        } catch (DataAccessException e) {
+            logger.error("Roles not found in database", e);
+            throw new NotFoundException("Roles not found");
+        }
+
+        return new ResponseEntity<>(roles, HttpStatus.OK);
     }
 }
