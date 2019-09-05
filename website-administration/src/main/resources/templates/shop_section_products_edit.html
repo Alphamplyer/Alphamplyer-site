@@ -17,24 +17,30 @@
 <div class="container">
     <img src="" alt="">
 
-    <form th:action="@{'/shop/products/edit/' + ${product.id}}" method="post">
+    <form th:action="@{'/shop/products/edit/' + ${formProducts.id}}" th:object="${formProducts}" method="post">
         <p>Nom</p>
-        <input type="text" th:field="${product.name}" name="name" id="name">
+        <input type="text" th:field="*{name}" name="name" id="name">
+        <label class="red" for="name" th:each="error: ${#fields.errors('name')}" th:text="${error}"></label>
 
         <p>Code du Produit</p>
-        <input type="text" th:field="${product.code}" name="code" id="code">
+        <input type="text" th:field="*{code}" name="code" id="code">
+        <label class="red" for="code" th:each="error: ${#fields.errors('code')}" th:text="${error}"></label>
 
         <p>Prix du Produit</p>
-        <input type="text" th:field="${product.price}" name="price" id="price">
+        <input type="text" th:field="*{price}" name="price" id="price">
+        <label class="red" for="price" th:each="error: ${#fields.errors('price')}" th:text="${error}"></label>
 
         <p>Disponible du (format année-mois-jour heure:minute:seconde.miliseconde)</p>
-        <input type="text" th:field="${product.availableFrom}" name="availableFrom" id="availableFrom" placeholder="année-mois-jour heure:minute:seconde:miliseconde">
+        <input type="text" th:field="*{availableFrom}" name="availableFrom" id="availableFrom" placeholder="année-mois-jour heure:minute:seconde:miliseconde">
+        <label class="red" for="availableFrom" th:each="error: ${#fields.errors('availableFrom')}" th:text="${error}"></label>
 
         <p>Au (format année-mois-jour heure:minute:seconde.miliseconde) (Peut-être null)</p>
-        <input type="text" th:field="${product.availableTo}" name="availableTo" id="availableTo" placeholder="année-mois-jour heure:minute:seconde:miliseconde">
+        <input type="text" th:field="*{availableTo}" name="availableTo" id="availableTo" placeholder="année-mois-jour heure:minute:seconde:miliseconde">
+        <label class="red" for="availableTo" th:each="error: ${#fields.errors('availableTo')}" th:text="${error}"></label>
 
         <p>Description (Peut-être null)</p>
-        <textarea th:field="${product.description}" name="description" id="description" cols="30" rows="10"></textarea>
+        <textarea th:field="*{description}" name="description" id="description" cols="30" rows="10"></textarea>
+        <label class="red" for="description" th:each="error: ${#fields.errors('description')}" th:text="${error}"></label>
 
         <input type="submit" value="Enregistrer">
         <a th:href="@{/shop/products}" class="btn-form-cancel">Annuler</a>

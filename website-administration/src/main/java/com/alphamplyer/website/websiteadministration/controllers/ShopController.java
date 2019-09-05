@@ -1,6 +1,8 @@
 package com.alphamplyer.website.websiteadministration.controllers;
 
 import com.alphamplyer.website.websiteadministration.beans.products.Product;
+import com.alphamplyer.website.websiteadministration.beans.products.ProductStatus;
+import com.alphamplyer.website.websiteadministration.models.products.FormProducts;
 import com.alphamplyer.website.websiteadministration.proxies.MicroserviceProductsProxy;
 import feign.FeignException;
 import org.slf4j.Logger;
@@ -8,12 +10,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import utils.validation.date.TimestampUtils;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -28,14 +34,11 @@ public class ShopController {
         this.microserviceProductsProxy = microserviceProductsProxy;
     }
 
-
     /**
      * Display shop main page
      */
     @RequestMapping(value = "/shop")
-    public String displayShopAdminPage(Model model, HttpSession session) {
-        if (session.getAttribute("user") == null) { return "redirect:/login"; }
-
+    public String displayShopAdminPage(Model model) {
         return "shop_section";
     }
 
@@ -43,8 +46,7 @@ public class ShopController {
      * display list of products
      */
     @RequestMapping(value = "/shop/products")
-    public String displayShopProductPage(Model model, HttpSession session) {
-        if (session.getAttribute("user") == null) { return "redirect:/login"; }
+    public String displayShopProductPage(Model model) {
 
         List<Product> products = null;
 
@@ -69,8 +71,7 @@ public class ShopController {
      * display edit page of product
      */
     @RequestMapping(value = "/shop/products/edit/{id}", method = RequestMethod.GET)
-    public String displayShopProductEditPage(@PathVariable(name = "id") Integer id, Model model, HttpSession session) {
-        if (session.getAttribute("user") == null) { return "redirect:/login"; }
+    public String displayShopProductEditPage(@PathVariable(name = "id") Integer id, Model model) {
 
         Product product = null;
 
@@ -86,7 +87,19 @@ public class ShopController {
             return "error";
         }
 
-        model.addAttribute("product", product);
+        FormProducts formProducts = new FormProducts();
+
+        formProducts.setId(product.getId());
+        formProducts.setCode(product.getCode());
+        formProducts.setName(product.getName());
+        formProducts.setPrice(product.getPrice());
+        formProducts.setDescription(product.getDescription());
+        formProducts.setAvailableFrom(product.getAvailableFrom().toString());
+
+        if (product.getAvailableTo() != null)
+            formProducts.setAvailableTo(product.getAvailableTo().toString());
+
+        model.addAttribute("formProducts", formProducts);
 
         return "shop_section_products_edit";
     }
@@ -95,12 +108,9 @@ public class ShopController {
      * display add page of product
      */
     @RequestMapping(value = "/shop/products/new", method = RequestMethod.GET)
-    public String displayShopProductAddPage(Model model, HttpSession session) {
-        if (session.getAttribute("user") == null) {
-            return "redirect:/login";
-        }
+    public String displayShopProductAddPage(Model model) {
 
-        model.addAttribute("product", new Product());
+        model.addAttribute("formProducts", new FormProducts());
 
         return "shop_section_products_add";
     }
@@ -109,29 +119,93 @@ public class ShopController {
      * edit product
      */
     @RequestMapping(value = "/shop/products/edit/{id}", method = RequestMethod.POST)
-    public ModelAndView editProduct(HttpSession session) {
-        if (session.getAttribute("user") == null) { return new ModelAndView("redirect:/login"); }
+    public ModelAndView editProduct(@ModelAttribute("formProducts") @Valid FormProducts formProducts,
+                                    BindingResult result,
+                                    @PathVariable(name = "id") Integer id) {
+
+        if (result.hasErrors()) {
+            return new ModelAndView("shop_section_products_edit", "formProducts", formProducts);
+        }
+
+        Product product;
+
+        try {
+            product = microserviceProductsProxy.getProductByID(id, true, true);
+        } catch (FeignException e) {
+            logger.error("failed to get product", e);
+            product = null;
+        }
+
+        if (product == null) {
+            return new ModelAndView("error");
+        }
+
+        product.setCode(formProducts.getCode());
+        product.setName(formProducts.getName());
+        product.setDescription(formProducts.getDescription());
+        product.setPrice(formProducts.getPrice());
+        product.setAvailableFrom(TimestampUtils.isValid(formProducts.getAvailableFrom()).y);
+        product.setAvailableTo(TimestampUtils.isValid(formProducts.getAvailableTo()).y);
+
+        try {
+            microserviceProductsProxy.saveProduct(product);
+        } catch (FeignException e) {
+            logger.error("Failed to update product", e);
+            return new ModelAndView("error");
+        }
 
         return new ModelAndView("redirect:/shop/products");
     }
 
+    /**
+     * add a product
+     */
     @RequestMapping(value = "/shop/products/new", method = RequestMethod.POST)
-    public ModelAndView addProduct(HttpSession session) {
-        if (session.getAttribute("user") == null) { return new ModelAndView("redirect:/login"); }
+    public ModelAndView addProduct(@ModelAttribute("formProducts") @Valid FormProducts formProducts,
+                                   BindingResult result) {
+
+        if (result.hasErrors()) {
+            return new ModelAndView("shop_section_products_new", "formProducts", formProducts);
+        }
+
+        Product product = new Product();
+
+        product.setCode(formProducts.getCode());
+        product.setName(formProducts.getName());
+        product.setDescription(formProducts.getDescription());
+        product.setPrice(formProducts.getPrice());
+        product.setUnitByUser(-1);
+        product.setRenewal(false);
+        product.setGameContent(true);
+        product.setStatus(ProductStatus.AVAILABLE);
+        product.setImage_id(1);
+        product.setAvailableFrom(TimestampUtils.isValid(formProducts.getAvailableFrom()).y);
+        product.setAvailableTo(TimestampUtils.isValid(formProducts.getAvailableTo() ).y);
+        product.setTypeId(1);
+
+        try {
+            microserviceProductsProxy.addProduct(product);
+        } catch (FeignException e) {
+            return new ModelAndView("error");
+        }
 
         return new ModelAndView("redirect:/shop/products");
     }
 
+    /**
+     * display reductions page
+     */
     @RequestMapping(value = "/shop/reductions", method = RequestMethod.GET)
-    public String displayReductionPage(Model model, HttpSession session) {
-        if (session.getAttribute("user") == null) { return "redirect:/login"; }
+    public String displayReductionPage(Model model) {
 
         return "shop_section_reductions";
     }
 
+    /**
+     * display product type page
+     */
     @RequestMapping(value = "/shop/productTypes")
-    public String displayShopProductTypePage(Model model, HttpSession session) {
-        if (session.getAttribute("user") == null) { return "redirect:/login"; }
+    public String displayShopProductTypePage(Model model) {
 
         return "shop_section_product-types";
     }

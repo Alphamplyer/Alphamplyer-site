@@ -17,8 +17,6 @@ public class IndexController {
      */
     @RequestMapping(value = {"/", "/index", "/home"})
     public String displayIndexPage(Model model, HttpSession session) {
-        if (session.getAttribute("user") == null) { return "redirect:/login"; }
-
         return "index";
     }
 }

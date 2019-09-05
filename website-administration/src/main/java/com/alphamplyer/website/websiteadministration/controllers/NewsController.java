@@ -40,8 +40,6 @@ public class NewsController {
 
     @RequestMapping(value = "/news")
     public String displayNewsArray(Model model, HttpSession session) {
-        if (session.getAttribute("user") == null) { return "redirect:/login"; }
-
         List<News> news = null;
 
         try {
@@ -63,7 +61,6 @@ public class NewsController {
 
     @RequestMapping(value = "/news/edit/{id}", method = RequestMethod.GET)
     public String displayNewsEditPage(@PathVariable(name = "id") Integer id, Model model, HttpSession session) {
-        if (session.getAttribute("user") == null) { return "redirect:/login"; }
 
         News db_news = null;
 
@@ -86,19 +83,25 @@ public class NewsController {
         news.setDescription(db_news.getDescription());
         news.setPublicationTime(db_news.getPublicationTime().toString());
 
-        model.addAttribute("news", news);
+        model.addAttribute("formNews", news);
 
         return "news_section_edit";
     }
 
     @RequestMapping(value = "/news/edit/{id}", method = RequestMethod.POST)
-    public ModelAndView editNews(@Valid @ModelAttribute FormNews news, @PathVariable(name = "id") Integer id, BindingResult result, HttpSession session) {
-        if (session.getAttribute("user") == null) { return new ModelAndView("redirect:/login"); }
+    public ModelAndView editNews(@ModelAttribute("formNews") @Valid FormNews news,
+                                 BindingResult result,
+                                 @PathVariable(name = "id") Integer id,
+                                 HttpSession session) {
+        System.out.println(news.getId());
 
         User user = (User)session.getAttribute("user");
 
-        if (result.hasErrors())
-            return new ModelAndView("news_section_edit", "news", news);
+        if (result.hasErrors()) {
+            news.setId(id);
+            logger.info("has error, return on the form");
+            return new ModelAndView("news_section_edit", "formNews", news);
+        }
 
         News db_news;
 
@@ -110,6 +113,7 @@ public class NewsController {
         }
 
         if (db_news == null) {
+            logger.info("load error page");
             return new ModelAndView("error");
         }
 
@@ -131,19 +135,19 @@ public class NewsController {
 
     @RequestMapping(value = "/news/new", method = RequestMethod.GET)
     public String displayNewNewsPage(Model model, HttpSession session) {
-        if (session.getAttribute("user") == null) { return "redirect:/login"; }
-        model.addAttribute("news", new FormNews());
+        model.addAttribute("formNews", new FormNews());
         return "news_section_new";
     }
 
     @RequestMapping(value = "/news/new", method = RequestMethod.POST)
-    public ModelAndView createNews(@Valid @ModelAttribute FormNews news, BindingResult result,HttpSession session) {
-        if (session.getAttribute("user") == null) { return new ModelAndView("redirect:/login"); }
+    public ModelAndView createNews(@ModelAttribute @Valid FormNews news,
+                                   BindingResult result,
+                                   HttpSession session) {
 
         User user = (User)session.getAttribute("user");
 
         if (result.hasErrors())
-            return new ModelAndView("news_section_new", "news", news);
+            return new ModelAndView("news_section_new", "formNews", news);
 
         News db_news = new News();
 
@@ -170,7 +174,6 @@ public class NewsController {
 
     @RequestMapping(value = "/news/delete/{id}", method = RequestMethod.GET)
     public String deleteNews (@PathVariable (name = "id") Integer id, HttpSession session) {
-        if (session.getAttribute("user") == null) { return "redirect:/login"; }
 
         try {
             microserviceNewsProxy.deleteNews(id);

@@ -16,21 +16,21 @@
 
 <div class="container">
 
-    <form th:action="@{/news/new}" th:object="${news}" method="post">
+    <form th:action="@{/news/new}" th:object="${formNews}" method="post">
         <p>Titre</p>
-        <input type="text" th:field="${news.title}" name="title" id="title">
+        <input type="text" th:field="*{title}" name="title" id="title">
         <label class="red" for="title" th:each="error: ${#fields.errors('title')}" th:text="${error}"></label>
 
         <p>Date de publication (format année-mois-jour heure:minute:seconde.miliseconde)</p>
-        <input type="text" th:field="${news.publicationTime}" name="publicationTime" id="publicationTime" placeholder="année-mois-jour heure:minute:seconde:miliseconde">
+        <input type="text" th:field="*{publicationTime}" name="publicationTime" id="publicationTime" placeholder="année-mois-jour heure:minute:seconde:miliseconde">
         <label class="red" for="publicationTime" th:each="error: ${#fields.errors('publicationTime')}" th:text="${error}"></label>
 
-        <p>Description (Peut-être vide)</p>
-        <textarea th:field="${news.description}" name="description" id="description" cols="30" rows="10"></textarea>
+        <p>Description</p>
+        <textarea th:field="*{description}" name="description" id="description" cols="30" rows="10"></textarea>
         <label class="red" for="description" th:each="error: ${#fields.errors('description')}" th:text="${error}"></label>
 
         <p>Contenu</p>
-        <textarea th:field="${news.content}" name="content" id="content" cols="30" rows="10"></textarea>
+        <textarea th:field="*{content}" name="content" id="content" cols="30" rows="10"></textarea>
         <label class="red" for="content" th:each="error: ${#fields.errors('content')}" th:text="${error}"></label>
 
         <input type="submit" value="Enregistrer">

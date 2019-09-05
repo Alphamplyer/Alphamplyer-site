@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@EnableFeignClients
+@EnableFeignClients("com.alphamplyer.website.websiteadministration")
 public class WebsiteAdministrationApplication {
 
 	public static void main(String[] args) {

@@ -96,6 +96,8 @@ a {
 .menus a:hover {
   color: #F51;
   background-color: #dddddd; }
+.menus li:hover .submenu-title {
+  color: #F51; }
 
 .menu {
   position: fixed;

@@ -19,6 +19,10 @@ $vertical_menu_width: 250px;
         color: $color_in-text-link-hover;
         background-color: #dddddd;
     }
+
+    li:hover .submenu-title {
+        color: $color_in-text-link-hover;
+    }
 }
 
 .menu {

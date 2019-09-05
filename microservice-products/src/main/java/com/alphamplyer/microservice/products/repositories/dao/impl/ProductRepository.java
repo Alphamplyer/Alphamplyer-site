@@ -128,7 +128,6 @@ public class ProductRepository extends DAORepository implements IProductReposito
             "VALUES (:code, :name, :description, :price, :unit_by_user, :renewal, :game_content, :status, :image_id, :available_from, :available_to, :type_id)";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        Timestamp now = new Timestamp(System.currentTimeMillis());
 
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("code", product.getCode());
@@ -139,7 +138,7 @@ public class ProductRepository extends DAORepository implements IProductReposito
         params.addValue("unit_by_user", product.getUnitByUser());
         params.addValue("renewal", product.getRenewal());
         params.addValue("game_content", product.getGameContent());
-        params.addValue("status", product.getStatus());
+        params.addValue("status", product.getStatus().name());
         params.addValue("image_id", product.getImage_id());
         params.addValue("available_from", product.getAvailableFrom());
         params.addValue("available_to", product.getAvailableTo());
@@ -176,7 +175,7 @@ public class ProductRepository extends DAORepository implements IProductReposito
         params.addValue("unit_by_user", product.getUnitByUser());
         params.addValue("renewal", product.getRenewal());
         params.addValue("game_content", product.getGameContent());
-        params.addValue("status", product.getStatus());
+        params.addValue("status", product.getStatus().name());
         params.addValue("image_id", product.getImage_id());
         params.addValue("available_from", product.getAvailableFrom());
         params.addValue("available_to", product.getAvailableTo());

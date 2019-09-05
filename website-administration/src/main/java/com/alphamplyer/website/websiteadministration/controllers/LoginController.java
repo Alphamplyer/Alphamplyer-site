@@ -44,7 +44,6 @@ public class LoginController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login(@Valid @ModelAttribute LoginUser loginUser, BindingResult result, HttpSession session) {
-
         if (result.hasErrors())
             return new ModelAndView("login", "loginUser", loginUser);
 
@@ -86,6 +85,6 @@ public class LoginController {
         if (session.getAttribute("user") != null) {
             session.removeAttribute("user");
         }
-        return "redirect:index";
+        return "redirect:login";
     }
 }

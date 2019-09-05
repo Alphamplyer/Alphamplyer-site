@@ -4,8 +4,6 @@ import utils.validation.date.ValidTimestamp;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
-import java.util.List;
 
 public class FormNews {
 
