@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.alphamplyer</groupId>
+    <artifactId>iyard-project</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>IYARD PROJECT</name>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <!-- WEBSITES -->
+        <dependency>
+            <groupId>com.alphamplyer.website</groupId>
+            <artifactId>shop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alphamplyer.website</groupId>
+            <artifactId>main</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alphamplyer.website</groupId>
+            <artifactId>administration</artifactId>
+        </dependency>
+
+        <!-- MICRO-SERVICES -->
+
+        <dependency>
+            <groupId>com.alphamplyer.microservice</groupId>
+            <artifactId>news</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alphamplyer.microservice</groupId>
+            <artifactId>orders</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alphamplyer.microservice</groupId>
+            <artifactId>products</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alphamplyer.microservice</groupId>
+            <artifactId>users</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alphamplyer.microservice</groupId>
+            <artifactId>users-permissions</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
