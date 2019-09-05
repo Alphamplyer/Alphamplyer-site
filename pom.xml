@@ -36,20 +36,6 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.4</version>
-                <configuration>
-                    <excludes>
-                        <exclude>com/alphamplyer/website/administration/beans/*</exclude>
-                        <exclude>com/alphamplyer/website/administration/models/*</exclude>
-                        <exclude>com/alphamplyer/website/administration/controllers/*</exclude>
-                        <exclude>com/alphamplyer/website/administration/configuration/*</exclude>
-                        <exclude>com/alphamplyer/website/administration/proxies/*</exclude>
-                        <exclude>com/alphamplyer/website/administration/utils/objects/*</exclude>
-                        <exclude>com/alphamplyer/website/administration/utils/validation/password/*</exclude>
-
-                        <exclude>com/alphamplyer/website/administration/utils/validation/*/*Validator</exclude>
-                        <exclude>com/alphamplyer/website/administration/utils/validation/*/Valid*</exclude>
-                    </excludes>
-                </configuration>
                 <executions>
                     <execution>
                         <id>default-prepare-agent</id>
