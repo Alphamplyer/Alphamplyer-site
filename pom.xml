@@ -12,43 +12,16 @@
         <java.version>1.8</java.version>
     </properties>
 
-    <dependencies>
-        <!-- WEBSITES -->
-        <dependency>
-            <groupId>com.alphamplyer.website</groupId>
-            <artifactId>shop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alphamplyer.website</groupId>
-            <artifactId>main</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alphamplyer.website</groupId>
-            <artifactId>administration</artifactId>
-        </dependency>
+    <modules>
+        <module>website-administration</module>
+        <module>website-main</module>
+        <module>website-shop</module>
 
-        <!-- MICRO-SERVICES -->
-
-        <dependency>
-            <groupId>com.alphamplyer.microservice</groupId>
-            <artifactId>news</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alphamplyer.microservice</groupId>
-            <artifactId>orders</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alphamplyer.microservice</groupId>
-            <artifactId>products</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alphamplyer.microservice</groupId>
-            <artifactId>users</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alphamplyer.microservice</groupId>
-            <artifactId>users-permissions</artifactId>
-        </dependency>
-    </dependencies>
+        <module>microservice-news</module>
+        <module>microservice-orders</module>
+        <module>microservice-products</module>
+        <module>microservice-users</module>
+        <module>microservice-users-permissions</module>
+    </modules>
 
 </project>
