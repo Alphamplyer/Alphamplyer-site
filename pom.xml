@@ -14,8 +14,8 @@
     </properties>
 
     <modules>
-        <module>website-administration</module>
         <module>website-main</module>
+        <module>website-administration</module>
         <module>website-shop</module>
 
         <module>microservice-news</module>
