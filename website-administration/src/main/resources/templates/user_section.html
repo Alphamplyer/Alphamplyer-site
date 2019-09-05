@@ -5,14 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" th:href="@{/public/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <script src="https://kit.fontawesome.com/6bdf0d0706.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
-    <title>Title</title>
+    <title>Utilisateurs</title>
 </head>
 
 <body>
 <div th:replace="menu :: menu"></div>
 
+<div class="container">
+
+    <a th:href="@{/users/new}" class="btn">Nouveau</a>
+
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Role</th>
+            <th>Email</th>
+            <th>Date de naissance</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.username}"></td>
+            <td th:text="${roles.get(user.roleId + 1).name}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${#dates.format(user.birthDate, 'dd MMM yyyy')}"></td>
+            <td class="btn-cell">
+                <a th:href="@{'/users/edit/' + ${user.id}}" class="btn btn-edit">Modifier</a>
+                <a th:href="@{'/users/delete/' + ${user.id}}" class="btn btn-delete" onclick="return confirm('Voulez-vous vraiment effectuer cette action ?')">Supprimer</a>
+            </td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

@@ -70,6 +70,6 @@ public class RegisterController {
             return new ModelAndView("register", model.asMap());
         }
 
-        return new ModelAndView("redirect:login");
+        return new ModelAndView("redirect:/login");
     }
 }

@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 @PasswordMatches
 public class UpdateUser implements IUserValidation {
 
+    private Integer id;
+
     @NotNull
     @NotEmpty
     private String username;
@@ -21,6 +23,15 @@ public class UpdateUser implements IUserValidation {
     private String email;
 
     public UpdateUser() { }
+
+
+    /**
+     * Get user ID
+     * @return user ID
+     */
+    public Integer getId() {
+        return id;
+    }
 
     /**
      * Get user username
@@ -57,6 +68,15 @@ public class UpdateUser implements IUserValidation {
     @Override
     public String getMatchingPasswordForValidation() {
         return matchingPassword;
+    }
+
+
+    /**
+     * Define user ID
+     * @param id user ID
+     */
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     /**

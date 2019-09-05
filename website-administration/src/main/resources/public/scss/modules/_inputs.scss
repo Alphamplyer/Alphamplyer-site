@@ -6,23 +6,20 @@ input, textarea, .btn-form-cancel {
     padding: 10px;
 }
 
-textarea, input[type = "text"] {
+textarea, input[type = "text"], input[type = "password"] {
     width: 100%;
     background-color: #5c6269;
     @include border-radius(3px);
     color: #d4d8dc;
     margin: 10px 0;
-}
-
-textarea {
-    resize: vertical;
-}
-
-input[type = "text"] {
 
     &::placeholder {
         color: #c0c4c8;
     }
+}
+
+textarea {
+    resize: vertical;
 }
 
 input[type="submit"], .btn-form-cancel {
@@ -63,4 +60,11 @@ input[type="submit"], .btn-form-cancel {
 ::-webkit-scrollbar-thumb {
     background: $color_primary;
     border-radius: 10px;
+}
+
+input[type = "checkbox"] {
+    position: relative;
+    bottom: -3px;
+    margin-right: 4px;
+    -webkit-appearance: checkbox;
 }

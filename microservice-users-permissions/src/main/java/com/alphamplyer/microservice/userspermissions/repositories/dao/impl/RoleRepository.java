@@ -60,7 +60,7 @@ public class RoleRepository extends DAORepository implements IRoleRepository {
 
     @Override
     public List<Role> getRoles() {
-        String sql = "SELECT * FROM roles";
+        String sql = "SELECT * FROM roles ORDER BY id";
 
         RowMapper<Role> rowMapper = new RoleRowMapper();
 

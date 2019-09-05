@@ -189,7 +189,7 @@ input, textarea, .btn-form-cancel {
   -webkit-appearance: none;
   padding: 10px; }
 
-textarea, input[type="text"] {
+textarea, input[type="text"], input[type="password"] {
   width: 100%;
   background-color: #5c6269;
   -webkit-border-radius: 3px;
@@ -197,12 +197,11 @@ textarea, input[type="text"] {
   border-radius: 3px;
   color: #d4d8dc;
   margin: 10px 0; }
+  textarea::placeholder, input[type="text"]::placeholder, input[type="password"]::placeholder {
+    color: #c0c4c8; }
 
 textarea {
   resize: vertical; }
-
-input[type="text"]::placeholder {
-  color: #c0c4c8; }
 
 input[type="submit"], .btn-form-cancel {
   -webkit-border-radius: 3px;
@@ -236,6 +235,12 @@ input[type="submit"], .btn-form-cancel {
 ::-webkit-scrollbar-thumb {
   background: #ff4025;
   border-radius: 10px; }
+
+input[type="checkbox"] {
+  position: relative;
+  bottom: -3px;
+  margin-right: 4px;
+  -webkit-appearance: checkbox; }
 
 .red {
   color: #ff4025; }

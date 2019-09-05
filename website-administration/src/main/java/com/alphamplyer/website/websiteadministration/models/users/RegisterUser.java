@@ -1,5 +1,6 @@
 package com.alphamplyer.website.websiteadministration.models.users;
 
+import utils.validation.date.ValidDate;
 import utils.validation.email.ValidEmail;
 import utils.validation.password.PasswordMatches;
 
@@ -31,7 +32,7 @@ public class RegisterUser implements IUserValidation {
 
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "[0-3]{0,1}[0-9]{1}/[0-3]{0,1}[0-9]{1}/[0-9]{4}")
+    @ValidDate
     private String birthDate;
 
     @NotNull
