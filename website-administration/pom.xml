@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.alphamplyer.website</groupId>
-	<artifactId>website-administration</artifactId>
+	<artifactId>administration</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>website-administration</name>
 	<description>Website administration</description>
