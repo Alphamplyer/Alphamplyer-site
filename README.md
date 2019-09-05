@@ -68,5 +68,8 @@ Later, I will surely try to protect microservices with a Gateway API. For that I
 
 ## Information : Projet Progress
 
-I'm planning the end of the first version in one to two weeks.
-I will do this at first so that there are many examples, and as soon as it will be big enough in my opinion, I will transfer the license to a license MIT
+I pass the project under Apache license so we can use this example, for the moment mostly in French.
+
+The translation present in this project is only in the test state. Version 1 only includes the display of pages and their processing. All features planned for this site will be available in a future version.
+
+For more information, consult [news logs](https://github.com/Alphamplyer/IYARD-Project/edit/master/newsLogs.md) 
