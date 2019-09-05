@@ -1,6 +1,6 @@
 package utils.validation.password;
 
-import com.alphamplyer.website.websiteadministration.models.users.IUserValidation;
+import com.alphamplyer.website.administration.models.users.IUserValidation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
