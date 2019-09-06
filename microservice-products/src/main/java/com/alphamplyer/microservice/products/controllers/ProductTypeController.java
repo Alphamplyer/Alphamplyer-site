@@ -31,7 +31,7 @@ public class ProductTypeController {
      * @return a product type or a NotFoundException/BadRequestException error
      */
     @GetMapping(value = "/productType/id/{id}")
-    ResponseEntity<ProductType> getByID (@PathVariable(name = "id") Integer id) {
+    public ResponseEntity<ProductType> getByID (@PathVariable(name = "id") Integer id) {
         if (id == null || id < 0)
             throw new BadRequestException("Product type ID is null or lower than 0");
 
@@ -53,7 +53,7 @@ public class ProductTypeController {
      * @return a product type or a NotFoundException/BadRequestException error
      */
     @GetMapping(value = "/productType/parent/{id}")
-    ResponseEntity<ProductType> getParent (@PathVariable(name = "id") Integer id) {
+    public ResponseEntity<ProductType> getParent (@PathVariable(name = "id") Integer id) {
         if (id == null || id < 0)
             throw new BadRequestException("Product type ID is null or lower than 0");
 
@@ -75,7 +75,7 @@ public class ProductTypeController {
      * @return a list of child product type or a NotFoundException/BadRequestException error
      */
     @GetMapping(value = "/productType/childs/{id}")
-    ResponseEntity<List<ProductType>> getChilds (@PathVariable(name = "id") Integer id) {
+    public ResponseEntity<List<ProductType>> getChilds (@PathVariable(name = "id") Integer id) {
         if (id == null || id < 0)
             throw new BadRequestException("Product type ID is null or lower than 0");
 
@@ -96,7 +96,7 @@ public class ProductTypeController {
      * @return a list of product type or a NotFoundException/BadRequestException error
      */
     @GetMapping(value = "/productType/mains")
-    ResponseEntity<List<ProductType>> getMainProductType () {
+    public ResponseEntity<List<ProductType>> getMainProductType () {
         List<ProductType> productTypes;
 
         try {
@@ -115,7 +115,7 @@ public class ProductTypeController {
      * @return added product type or a UnableToInsertException
      */
     @PostMapping(value = "/productType/add")
-    ResponseEntity<ProductType> add (@RequestBody ProductType productType) {
+    public ResponseEntity<ProductType> add (@RequestBody ProductType productType) {
         ProductType rProductType = null;
 
         try {
@@ -137,7 +137,7 @@ public class ProductTypeController {
      * @return HttpResponse OK or a UnableToUpdateException
      */
     @PutMapping(value = "/productType/save")
-    ResponseEntity<Void> save (@RequestBody ProductType productType) {
+    public ResponseEntity<Void> save (@RequestBody ProductType productType) {
         try {
             productTypeRepository.save(productType);
         } catch (DataAccessException e) {
@@ -154,7 +154,7 @@ public class ProductTypeController {
      * @return HttpResponse OK or UnableToDeleteException
      */
     @DeleteMapping(value = "/productType/delete/{id}")
-    ResponseEntity<Void> delete (@PathVariable(name = "id") Integer id) {
+    public ResponseEntity<Void> delete (@PathVariable(name = "id") Integer id) {
         if (id == null || id < 0)
             throw new BadRequestException("Product type ID is null or lower than 0");
 
