@@ -17,6 +17,17 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Greenwich.SR2</spring-cloud.version>
+		<sonar.coverage.exclusions>
+			**/beans/*,
+			**/configuration/*,
+			**/controllers/*,
+			**/models/*,
+			**/proxies/*,
+			**/objects/*,
+
+			**/validation/**/*Validator,
+			**/validation/**/Valid*
+		</sonar.coverage.exclusions>
 	</properties>
 
 	<dependencies>

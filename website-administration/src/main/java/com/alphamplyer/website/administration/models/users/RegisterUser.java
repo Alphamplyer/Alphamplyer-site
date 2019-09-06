@@ -1,8 +1,8 @@
 package com.alphamplyer.website.administration.models.users;
 
-import utils.validation.date.ValidDate;
-import utils.validation.email.ValidEmail;
-import utils.validation.password.PasswordMatches;
+import com.alphamplyer.website.administration.utils.validation.date.ValidDate;
+import com.alphamplyer.website.administration.utils.validation.email.ValidEmail;
+import com.alphamplyer.website.administration.utils.validation.password.PasswordMatches;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotEmpty;

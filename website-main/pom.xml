@@ -17,6 +17,18 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+		<sonar.coverage.exclusions>
+			**/beans/*,
+			**/models/*,
+			**/controllers/*,
+			**/configuration/*,
+			**/proxies/*,
+			**/objects/*,
+			**/validation/password/*,
+
+			**/validation/**/*Validator,
+			**/validation/**/Valid*
+		</sonar.coverage.exclusions>
 	</properties>
 
 	<dependencies>
@@ -36,6 +48,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.1.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -70,10 +89,10 @@
 						<exclude>com/alphamplyer/website/main/controllers/*</exclude>
 						<exclude>com/alphamplyer/website/main/models/*</exclude>
 						<exclude>com/alphamplyer/website/main/proxies/*</exclude>
-						<exclude>com/alphamplyer/website/main/utils/validation/password/*</exclude>
+						<exclude>com/alphamplyer/website/main/com.alphamplyer.website.administration.utils/validation/password/*</exclude>
 
-						<exclude>com/alphamplyer/website/main/utils/validation/*/*Validator</exclude>
-						<exclude>com/alphamplyer/website/main/utils/validation/*/Valid*</exclude>
+						<exclude>com/alphamplyer/website/main/com.alphamplyer.website.administration.utils/validation/*/*Validator</exclude>
+						<exclude>com/alphamplyer/website/main/com.alphamplyer.website.administration.utils/validation/*/Valid*</exclude>
 					</excludes>
 				</configuration>
 				<executions>

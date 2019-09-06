@@ -3,7 +3,7 @@ package com.alphamplyer.website.administration.controllers;
 import com.alphamplyer.website.administration.beans.users.User;
 import com.alphamplyer.website.administration.models.users.LoginUser;
 import com.alphamplyer.website.administration.proxies.MicroserviceUserProxy;
-import utils.validation.email.Email;
+import com.alphamplyer.website.administration.utils.validation.email.Email;
 import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

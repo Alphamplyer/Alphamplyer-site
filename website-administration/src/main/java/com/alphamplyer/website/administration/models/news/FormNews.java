@@ -1,6 +1,6 @@
 package com.alphamplyer.website.administration.models.news;
 
-import utils.validation.date.ValidTimestamp;
+import com.alphamplyer.website.administration.utils.validation.date.ValidTimestamp;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

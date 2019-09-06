@@ -2,7 +2,7 @@ package com.alphamplyer.microservice.orders.controllers;
 
 import com.alphamplyer.microservice.orders.exceptions.*;
 import com.alphamplyer.microservice.orders.models.Order;
-import com.alphamplyer.microservice.orders.repository.dao.interf.IOrderRepository;
+import com.alphamplyer.microservice.orders.repositories.dao.interf.IOrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
