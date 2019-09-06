@@ -2,12 +2,19 @@ package com.alphamplyer.website.administration.models.products;
 
 import org.springframework.format.annotation.NumberFormat;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class FormProducts {
 
     private Integer id;
 
+    @NotNull
+    @NotEmpty
     private String code;
 
+    @NotNull
+    @NotEmpty
     private String name;
 
     private String description;
@@ -15,11 +22,25 @@ public class FormProducts {
     @NumberFormat
     private Double price;
 
+    @NotNull
+    @NotEmpty
     private String availableFrom;
 
+    @NotNull
+    @NotEmpty
     private String availableTo;
 
     public FormProducts() { }
+
+    public FormProducts(Integer id, @NotNull @NotEmpty String code, @NotNull @NotEmpty String name, String description, Double price, @NotNull @NotEmpty String availableFrom, @NotNull @NotEmpty String availableTo) {
+        this.id = id;
+        this.code = code;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.availableFrom = availableFrom;
+        this.availableTo = availableTo;
+    }
 
     //region // === Getters ================================================== //
 

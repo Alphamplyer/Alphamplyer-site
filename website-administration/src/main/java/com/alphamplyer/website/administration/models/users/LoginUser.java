@@ -15,6 +15,10 @@ public class LoginUser {
 
     public LoginUser() { }
 
+    public LoginUser(@NotNull @NotEmpty String identifier, @NotNull @NotEmpty String password) {
+        this.identifier = identifier;
+        this.password = password;
+    }
 
     /**
      * Get user identifier (email or username)

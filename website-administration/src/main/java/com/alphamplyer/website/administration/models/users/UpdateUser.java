@@ -1,7 +1,7 @@
 package com.alphamplyer.website.administration.models.users;
 
-import utils.validation.email.ValidEmail;
-import utils.validation.password.PasswordMatches;
+import com.alphamplyer.website.administration.utils.validation.email.ValidEmail;
+import com.alphamplyer.website.administration.utils.validation.password.PasswordMatches;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -24,6 +24,13 @@ public class UpdateUser implements IUserValidation {
 
     public UpdateUser() { }
 
+    public UpdateUser(Integer id, @NotNull @NotEmpty String username, String password, String matchingPassword, String email) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.matchingPassword = matchingPassword;
+        this.email = email;
+    }
 
     /**
      * Get user ID

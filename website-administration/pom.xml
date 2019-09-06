@@ -17,6 +17,18 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Greenwich.SR2</spring-cloud.version>
+		<sonar.coverage.exclusions>
+			**/beans/*,
+			**/models/*,
+			**/controllers/*,
+			**/configuration/*,
+		    **/proxies/*,
+			**/objects/*,
+			**/validation/password/*,
+
+			**/validation/**/*Validator,
+			**/validation/**/Valid*
+		</sonar.coverage.exclusions>
 	</properties>
 
 	<dependencies>
@@ -44,7 +56,19 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.4.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.4.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 	<dependencyManagement>
 		<dependencies>

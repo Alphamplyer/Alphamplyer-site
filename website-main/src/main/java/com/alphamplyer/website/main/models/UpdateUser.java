@@ -22,6 +22,13 @@ public class UpdateUser implements IUserValidation {
 
     public UpdateUser() { }
 
+    public UpdateUser(@NotNull @NotEmpty String username, String password, String matchingPassword, String email) {
+        this.username = username;
+        this.password = password;
+        this.matchingPassword = matchingPassword;
+        this.email = email;
+    }
+
     /**
      * Get user username
      * @return user username

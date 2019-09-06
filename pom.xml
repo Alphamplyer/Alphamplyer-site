@@ -11,11 +11,33 @@
 
     <properties>
         <java.version>1.8</java.version>
+
+        <sonar.host.url>http://sonarqube:9000</sonar.host.url>
+        <sonar.language>java</sonar.language>
+        <jacoco.version>0.8.2</jacoco.version>
+
+        <sonar.coverage.exclusions>
+            **/beans/*,
+            **/models/*,
+            **/controllers/*,
+            **/configurations/*,
+            **/proxies/*,
+            **/objects/*,
+            **/validation/password/*,
+
+            **/validation/**/*Validator,
+            **/validation/**/Valid*
+        </sonar.coverage.exclusions>
+
+        <sonar.jacoco.reportPaths>${basedir}/**/target/jacoco.exec</sonar.jacoco.reportPaths>
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.login>5fffbbdb00ed03faf5046a0d03e57b3835cd2aca</sonar.login>
+        <sonar.password></sonar.password>
     </properties>
 
     <modules>
-        <module>website-main</module>
         <module>website-administration</module>
+        <module>website-main</module>
         <module>website-shop</module>
 
         <module>microservice-news</module>
@@ -24,5 +46,4 @@
         <module>microservice-users</module>
         <module>microservice-users-permissions</module>
     </modules>
-
 </project>

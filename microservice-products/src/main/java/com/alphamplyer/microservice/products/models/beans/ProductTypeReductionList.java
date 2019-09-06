@@ -7,11 +7,27 @@ import java.util.List;
  */
 public class ProductTypeReductionList {
 
-    public List<Integer> productTypeIDs;
-    public Integer reductionID;
+    private List<Integer> productTypeIDs;
+    private Integer reductionID;
 
     public ProductTypeReductionList(List<Integer> productTypeIDs, Integer reductionID) {
         this.productTypeIDs = productTypeIDs;
+        this.reductionID = reductionID;
+    }
+
+    public List<Integer> getProductTypeIDs() {
+        return productTypeIDs;
+    }
+
+    public Integer getReductionID() {
+        return reductionID;
+    }
+
+    public void setProductTypeIDs(List<Integer> productTypeIDs) {
+        this.productTypeIDs = productTypeIDs;
+    }
+
+    public void setReductionID(Integer reductionID) {
         this.reductionID = reductionID;
     }
 }

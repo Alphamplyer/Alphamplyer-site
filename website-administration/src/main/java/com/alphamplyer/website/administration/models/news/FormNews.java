@@ -1,6 +1,6 @@
 package com.alphamplyer.website.administration.models.news;
 
-import utils.validation.date.ValidTimestamp;
+import com.alphamplyer.website.administration.utils.validation.date.ValidTimestamp;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -25,6 +25,14 @@ public class FormNews {
     private String content;
 
     public FormNews() {
+    }
+
+    public FormNews(long id, @NotNull @NotEmpty String title, @NotNull @NotEmpty String publicationTime, String description, @NotNull @NotEmpty String content) {
+        this.id = id;
+        this.title = title;
+        this.publicationTime = publicationTime;
+        this.description = description;
+        this.content = content;
     }
 
     /**

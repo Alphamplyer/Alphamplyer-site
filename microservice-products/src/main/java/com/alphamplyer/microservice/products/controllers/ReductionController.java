@@ -33,7 +33,7 @@ public class ReductionController {
      * @return a reduction or a NotFoundException/BadRequestException error
      */
     @GetMapping(value = "/reductions/id/{id}")
-    ResponseEntity<Reduction> getByID (@PathVariable(name = "id") Integer id) {
+    public ResponseEntity<Reduction> getByID (@PathVariable(name = "id") Integer id) {
         if (id == null || id < 0)
             throw new BadRequestException("Reduction ID is null or lower than 0");
 
@@ -55,7 +55,7 @@ public class ReductionController {
      * @return a list of product reduction or a NotFoundException error
      */
     @GetMapping(value = "/reductions/product/{id}")
-    ResponseEntity<List<Reduction>> getProductReduction (@PathVariable(name = "id") Integer id) {
+    public ResponseEntity<List<Reduction>> getProductReduction (@PathVariable(name = "id") Integer id) {
 
         List<Reduction> reductions;
 
@@ -75,7 +75,7 @@ public class ReductionController {
      * @return a list of product type reduction or a NotFoundException error
      */
     @GetMapping(value = "/reductions/productType/{id}")
-    ResponseEntity<List<Reduction>> getProductByTypeReduction(@PathVariable(name = "id") Integer id) {
+    public ResponseEntity<List<Reduction>> getProductByTypeReduction(@PathVariable(name = "id") Integer id) {
         List<Reduction> reductions;
 
         try {
@@ -94,7 +94,7 @@ public class ReductionController {
      * @return added reduction or an UnableToInsertException error
      */
     @PostMapping(value = "/reductions/add")
-    ResponseEntity<Reduction> add (@RequestBody Reduction reduction) {
+    public ResponseEntity<Reduction> add (@RequestBody Reduction reduction) {
         Reduction rReduction = null;
 
         try {
@@ -116,9 +116,9 @@ public class ReductionController {
      * @return HttpResponse OK or an UnableToUpdateException error
      */
     @PostMapping(value = "/reductions/add/product")
-    ResponseEntity<Void> deleteOldAndSaveNewPReduction(@RequestBody ProductReductionList productReductionList) {
+    public ResponseEntity<Void> deleteOldAndSaveNewPReduction(@RequestBody ProductReductionList productReductionList) {
         try {
-            reductionRepository.deleteOldAndSaveNewPReduction(productReductionList.productIDs, productReductionList.reductionID);
+            reductionRepository.deleteOldAndSaveNewPReduction(productReductionList.getProductIDs(), productReductionList.getReductionID());
         } catch (DataAccessException e) {
             logger.error("Failed to update product of reduction in database", e);
             throw new UnableToUpdateException("Failed to update product of reduction in database !");
@@ -133,9 +133,9 @@ public class ReductionController {
      * @return HttpResponse OK or an UnableToUpdateException error
      */
     @PostMapping(value = "/reductions/add/productType")
-    ResponseEntity<Void> deleteOldAndSaveNewPTypeReduction(@RequestBody ProductTypeReductionList productTypeReductionList) {
+    public ResponseEntity<Void> deleteOldAndSaveNewPTypeReduction(@RequestBody ProductTypeReductionList productTypeReductionList) {
         try {
-            reductionRepository.deleteOldAndSaveNewPReduction(productTypeReductionList.productTypeIDs, productTypeReductionList.reductionID);
+            reductionRepository.deleteOldAndSaveNewPReduction(productTypeReductionList.getProductTypeIDs(), productTypeReductionList.getReductionID());
         } catch (DataAccessException e) {
             logger.error("Failed to update product types of reduction in database", e);
             throw new UnableToUpdateException("Failed to update product types of reduction in database !");
@@ -150,7 +150,7 @@ public class ReductionController {
      * @return HttpResponse OK or an UnableToUpdateException error
      */
     @PutMapping(value = "/reductions/save")
-    ResponseEntity<Void> save (@RequestBody Reduction reduction) {
+    public ResponseEntity<Void> save (@RequestBody Reduction reduction) {
         try {
             reductionRepository.save(reduction);
         } catch (DataAccessException e) {
@@ -167,7 +167,7 @@ public class ReductionController {
      * @return HttpResponse OK or an UnableToDeleteException error
      */
     @DeleteMapping(value = "/reduction/delete/{id}")
-    ResponseEntity<Void> delete (@PathVariable(name = "id") Integer id) {
+    public ResponseEntity<Void> delete (@PathVariable(name = "id") Integer id) {
         if (id == null || id < 0)
             throw new BadRequestException("Reduction ID is null or lower than 0");
 
