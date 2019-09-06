@@ -27,6 +27,14 @@ public class FormNews {
     public FormNews() {
     }
 
+    public FormNews(long id, @NotNull @NotEmpty String title, @NotNull @NotEmpty String publicationTime, String description, @NotNull @NotEmpty String content) {
+        this.id = id;
+        this.title = title;
+        this.publicationTime = publicationTime;
+        this.description = description;
+        this.content = content;
+    }
+
     /**
      * Get ID of the news
      * @return ID of the news

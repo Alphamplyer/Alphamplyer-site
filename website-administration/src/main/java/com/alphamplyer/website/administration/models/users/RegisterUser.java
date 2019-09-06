@@ -41,6 +41,15 @@ public class RegisterUser implements IUserValidation {
 
     public RegisterUser() { }
 
+    public RegisterUser(@NotNull @NotEmpty @Pattern(regexp = "[a-zA-Z0-9 -]{2,30}") String username, @NotNull @NotEmpty String email, @NotNull @NotEmpty String password, @NotNull @NotEmpty String matchingPassword, @NotNull @NotEmpty String birthDate, @NotNull @AssertTrue Boolean termAccepted) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.matchingPassword = matchingPassword;
+        this.birthDate = birthDate;
+        this.termAccepted = termAccepted;
+    }
+
     /**
      * Get user username
      * @return user username

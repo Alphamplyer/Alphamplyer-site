@@ -4,10 +4,11 @@ package com.alphamplyer.website.administration.beans.users;
 import com.alphamplyer.website.administration.models.users.RegisterUser;
 import com.alphamplyer.website.administration.models.users.UpdateUser;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
 
     private Integer id;
     private Integer roleId;
