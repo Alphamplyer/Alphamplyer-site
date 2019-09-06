@@ -1,4 +1,4 @@
-package com.alphamplyer.website.main.configuration;
+package com.alphamplyer.website.main.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

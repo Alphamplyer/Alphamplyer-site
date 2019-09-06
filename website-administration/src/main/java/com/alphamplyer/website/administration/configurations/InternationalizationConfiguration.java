@@ -1,4 +1,4 @@
-package com.alphamplyer.website.administration.configuration;
+package com.alphamplyer.website.administration.configurations;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;

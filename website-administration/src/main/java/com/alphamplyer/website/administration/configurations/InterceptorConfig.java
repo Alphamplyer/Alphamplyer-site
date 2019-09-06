@@ -1,4 +1,4 @@
-package com.alphamplyer.website.administration.configuration;
+package com.alphamplyer.website.administration.configurations;
 
 import com.alphamplyer.website.administration.controllers.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;
