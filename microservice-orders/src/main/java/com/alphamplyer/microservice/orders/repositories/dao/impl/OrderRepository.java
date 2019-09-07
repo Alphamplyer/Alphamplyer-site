@@ -80,6 +80,7 @@ public class OrderRepository extends DAORepository implements IOrderRepository {
         order.setId((Integer)keys.get("id"));
         order.setStatus(OrderStatus.valueOf((String)keys.get("status")));
         order.setCreatedAt((Timestamp)keys.get("created_at"));
+        order.setUpdatedAt((Timestamp)keys.get("updated_at"));
 
         return order;
     }
