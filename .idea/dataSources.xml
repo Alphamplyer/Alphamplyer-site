@@ -61,5 +61,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/alphamplyer-microservice-stories</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="alphamplyer-microservice-news-test@localhost" uuid="ba980960-497f-4bf2-9e05-bf16dae97907">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/alphamplyer-microservice-news-test</jdbc-url>
+    </data-source>
   </component>
 </project>

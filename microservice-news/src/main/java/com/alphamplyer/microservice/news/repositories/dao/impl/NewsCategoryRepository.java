@@ -41,7 +41,7 @@ public class NewsCategoryRepository extends DAORepository implements INewsCatego
     @Override
     public NewsCategory getParent(Integer id) {
         String sql = "SELECT nca.* FROM news_categories nca, news_categories ncb " +
-            "WHERE ncb.parent_id IS NOT NULL AND nca.id = ncb.parent_id AND ncb.parent_id = :id";
+            "WHERE ncb.parent_id IS NOT NULL AND nca.id = ncb.parent_id AND ncb.id = :id";
 
         RowMapper<NewsCategory> rowMapper = new NewsCategoryRowMapper();
 
