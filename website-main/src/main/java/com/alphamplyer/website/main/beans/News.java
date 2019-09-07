@@ -8,9 +8,9 @@ import java.util.List;
  */
 public class News {
 
-    private long id;
-    private int categoryId;
-    private int mainImageId;
+    private Integer id;
+    private Integer categoryId;
+    private Integer mainImageId;
     private Timestamp publicationTime;
     private String title;
     private String description;
@@ -26,7 +26,7 @@ public class News {
      * Get ID of the news
      * @return ID of the news
      */
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -34,7 +34,7 @@ public class News {
      * Get category ID of the news
      * @return category ID of the news
      */
-    public int getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 
@@ -42,7 +42,7 @@ public class News {
      * Get main image ID of the news
      * @return main image ID of the news
      */
-    public int getMainImageId() {
+    public Integer getMainImageId() {
         return mainImageId;
     }
 
@@ -106,7 +106,7 @@ public class News {
      * Define ID of the news
      * @param id ID of the news
      */
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -114,7 +114,7 @@ public class News {
      * Define category ID of the news
      * @param categoryId category ID of the news
      */
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -122,7 +122,7 @@ public class News {
      * Define main image ID of the news
      * @param mainImageId main image ID of the news
      */
-    public void setMainImageId(int mainImageId) {
+    public void setMainImageId(Integer mainImageId) {
         this.mainImageId = mainImageId;
     }
 
