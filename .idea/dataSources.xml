@@ -73,5 +73,23 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/alphamplyer-microservice-orders-test</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="alphamplyer-microservice-products-test@localhost" uuid="f14036dd-a3d1-4c93-a2ce-b8778f5852a3">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/alphamplyer-microservice-products-test</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="alphamplyer-microservice-users-permissions-test@localhost" uuid="1dfc540d-f417-467a-b64a-1484b7819f40">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/alphamplyer-microservice-users-permissions-test</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="alphamplyer-microservice-users-test@localhost" uuid="accf8a9b-5b58-4517-aa55-a4b503c14737">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/alphamplyer-microservice-users-test</jdbc-url>
+    </data-source>
   </component>
 </project>
