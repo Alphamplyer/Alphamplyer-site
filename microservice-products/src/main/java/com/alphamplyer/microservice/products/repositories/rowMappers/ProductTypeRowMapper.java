@@ -18,6 +18,7 @@ public class ProductTypeRowMapper implements RowMapper<ProductType> {
         productType.setId(rs.getInt("id"));
         productType.setParentId(rs.getInt("parent_id"));
         productType.setCode(rs.getString("code"));
+        productType.setName(rs.getString("name"));
         productType.setDescription(rs.getString("description"));
 
         return productType;

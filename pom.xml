@@ -29,7 +29,7 @@
             **/validation/**/Valid*
         </sonar.coverage.exclusions>
 
-        <sonar.jacoco.reportPaths>${basedir}/**/target/jacoco.exec</sonar.jacoco.reportPaths>
+        <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.login>5fffbbdb00ed03faf5046a0d03e57b3835cd2aca</sonar.login>
         <sonar.password></sonar.password>

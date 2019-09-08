@@ -46,7 +46,7 @@ public interface INewsRepository {
      * @param news_id news ID
      * @return list of author
      */
-    List<Integer> getNewsAuthor(Long news_id);
+    List<Integer> getNewsAuthor(Integer news_id);
 
     /**
      * Save a news

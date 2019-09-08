@@ -63,7 +63,7 @@ public class OrderLineRepository extends DAORepository implements IOrderLineRepo
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("order_id", orderLine.getOrderId());
         params.addValue("product_id", orderLine.getProductId());
-        params.addValue("status", orderLine.getStatus());
+        params.addValue("status", orderLine.getStatus().name());
         params.addValue("quantity", orderLine.getQuantity());
         params.addValue("price", orderLine.getPrice());
         params.addValue("reduction_amount", orderLine.getReductionAmount());
@@ -78,7 +78,7 @@ public class OrderLineRepository extends DAORepository implements IOrderLineRepo
         else
             return null;
 
-        orderLine.setId((Integer)keys.get("id"));
+        orderLine.setId((Integer) keys.get("id"));
 
         return orderLine;
     }
@@ -94,18 +94,18 @@ public class OrderLineRepository extends DAORepository implements IOrderLineRepo
                 sql.append(", ");
             }
             sql.append("(")
-                .append("order_id_").append(i).append(", ")
-                .append("product_id_").append(i).append(", ")
-                .append("status_").append(i).append(", ")
-                .append("quantity_").append(i).append(", ")
-                .append("price_").append(i).append(", ")
-                .append("reduction_amount_").append(i).append(", ")
-                .append("renewal_rate_").append(i).append(", ")
+                .append(":order_id_").append(i).append(", ")
+                .append(":product_id_").append(i).append(", ")
+                .append(":status_").append(i).append(", ")
+                .append(":quantity_").append(i).append(", ")
+                .append(":price_").append(i).append(", ")
+                .append(":reduction_amount_").append(i).append(", ")
+                .append(":renewal_rate_").append(i)
             .append(")");
 
             params.addValue("order_id_" + i, orderLines.get(i).getOrderId());
             params.addValue("product_id_" + i, orderLines.get(i).getProductId());
-            params.addValue("status_" + i, orderLines.get(i).getStatus());
+            params.addValue("status_" + i, orderLines.get(i).getStatus().name());
             params.addValue("quantity_" + i, orderLines.get(i).getQuantity());
             params.addValue("price_" + i, orderLines.get(i).getPrice());
             params.addValue("reduction_amount_" + i, orderLines.get(i).getReductionAmount());
@@ -119,16 +119,15 @@ public class OrderLineRepository extends DAORepository implements IOrderLineRepo
     public void save(OrderLine orderLine) {
         String sql = "UPDATE order_lines " +
             "SET status = :status, quantity = :quantity, price = :price, " +
-            "reduction_amount = :reduction_amount, renewal_rate = :renewal_rate " +
+            "reduction_amount = :reduction_amount " +
             "WHERE id = :id";
 
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("id", orderLine.getId());
-        params.addValue("status", orderLine.getStatus());
+        params.addValue("status", orderLine.getStatus().name());
         params.addValue("quantity", orderLine.getQuantity());
         params.addValue("price", orderLine.getPrice());
         params.addValue("reduction_amount", orderLine.getReductionAmount());
-        params.addValue("renewal_rate", orderLine.getRenewalRate().name());
 
         namedParameterJdbcTemplate.update(sql, params);
     }

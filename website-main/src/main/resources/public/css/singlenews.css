@@ -224,6 +224,7 @@ header {
   .singlenews-container .main-image {
     margin-bottom: 50px; }
   .singlenews-container .news-content {
-    text-align: justify; }
+    text-align: justify;
+    margin-bottom: 100px; }
 
 /*# sourceMappingURL=singlenews.css.map */

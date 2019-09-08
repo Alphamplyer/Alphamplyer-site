@@ -40,14 +40,15 @@ public class ReductionRepository extends DAORepository implements IReductionRepo
 
     @Override
     public List<Reduction> getProductReductions(Integer productId) {
-        String sql = "SELECT r.* " +
-            "FROM reductions r, product_reduction pr, product_type_reduction ptr, products p " +
-            "WHERE ((pr.product_id = p.id AND pr.reduction_id = r.id) OR (ptr.type_id = p.type_id AND ptr.reduction_id = r.id)) " +
-            "AND p.id = :id";
+        String sql = "SELECT r.* FROM reductions r, product_reduction pr, product_type_reduction ptr, products p " +
+            "WHERE p.id = :id AND (pr.product_id = p.id OR p.type_id = ptr.type_id) AND pr.reduction_id = r.id AND ptr.reduction_id = r.id";
 
         RowMapper<Reduction> rowMapper = new ReductionRowMapper();
 
-        return jdbcTemplate.query(sql, rowMapper);
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("id", productId);
+
+        return namedParameterJdbcTemplate.query(sql, params, rowMapper);
     }
 
     @Override
@@ -56,9 +57,13 @@ public class ReductionRepository extends DAORepository implements IReductionRepo
             "FROM reductions r, product_type_reduction ptr, products p " +
             "WHERE ptr.type_id = p.type_id AND ptr.reduction_id = r.id AND p.id = :id";
 
+
         RowMapper<Reduction> rowMapper = new ReductionRowMapper();
 
-        return jdbcTemplate.query(sql, rowMapper);
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("id", type_id);
+
+        return namedParameterJdbcTemplate.query(sql, params, rowMapper);
     }
 
     @Override

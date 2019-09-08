@@ -21,6 +21,6 @@ public class ReductionRowMapper implements RowMapper<Reduction> {
         reduction.setBeginDateTime(rs.getTimestamp("begin_date_time"));
         reduction.setEndDateTime(rs.getTimestamp("end_date_time"));
 
-        return null;
+        return reduction;
     }
 }

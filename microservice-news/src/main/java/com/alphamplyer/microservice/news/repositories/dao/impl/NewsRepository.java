@@ -58,7 +58,7 @@ public class NewsRepository extends DAORepository implements INewsRepository {
     }
 
     @Override
-    public List<Integer> getNewsAuthor(Long news_id) {
+    public List<Integer> getNewsAuthor(Integer news_id) {
         String sql = "SELECT author_id FROM news_authors WHERE news_id = :news_id";
 
         MapSqlParameterSource params = new MapSqlParameterSource();
@@ -103,7 +103,7 @@ public class NewsRepository extends DAORepository implements INewsRepository {
 
     @Override
     public List<News> getNewsByAuthorId(Integer authorId, Integer offset, Integer limit, Boolean getOnlyPublished) {
-        String sql = "SELECT n.* FROM news n, news_authors na WHERE na.news_id = n.id AND na.author_id = :authorId "
+        String sql = "SELECT n.* FROM news n, news_authors na WHERE na.news_id = n.id AND na.author_id = :author_id "
             + buildSQLCondition(getOnlyPublished, " AND publication_time < NOW()")
             + " ORDER BY publication_time DESC "
             + buildSQLOffsetLimit(offset, limit);
@@ -152,7 +152,7 @@ public class NewsRepository extends DAORepository implements INewsRepository {
         else
             return null;
 
-        news.setId((long)keys.get("id"));
+        news.setId((int)keys.get("id"));
         news.setCreatedAt(now);
         news.setUpdatedAt(now);
 

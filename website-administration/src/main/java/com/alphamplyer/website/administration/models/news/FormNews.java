@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 public class FormNews {
 
-    private long id;
+    private Integer id;
 
     @NotNull
     @NotEmpty
@@ -27,19 +27,11 @@ public class FormNews {
     public FormNews() {
     }
 
-    public FormNews(long id, @NotNull @NotEmpty String title, @NotNull @NotEmpty String publicationTime, String description, @NotNull @NotEmpty String content) {
-        this.id = id;
-        this.title = title;
-        this.publicationTime = publicationTime;
-        this.description = description;
-        this.content = content;
-    }
-
     /**
      * Get ID of the news
      * @return ID of the news
      */
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -79,7 +71,7 @@ public class FormNews {
      * Define ID of the news
      * @param id ID of the news
      */
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
