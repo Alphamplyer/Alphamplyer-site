@@ -64,8 +64,10 @@ public class NewsController {
 
         try {
             singlenews.setNews(microserviceNewsProxy.getNewsByID(id, true));
-            Integer[] listIDs = singlenews.getNews().getAuthors().toArray(new Integer[0]);
-            singlenews.setAuthors(microserviceUserProxy.getAuthorsByListOfIDs(listIDs));
+            if (singlenews.getNews().getAuthors() != null) {
+                Integer[] listIDs = singlenews.getNews().getAuthors().toArray(new Integer[0]);
+                singlenews.setAuthors(microserviceUserProxy.getAuthorsByListOfIDs(listIDs));
+            }
         } catch (FeignException e) {
             return "error";
         }

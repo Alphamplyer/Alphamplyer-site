@@ -1,0 +1,8 @@
+INSERT INTO public.news_categories (id, parent_id, creator_id, name, description, created_at, updated_at) VALUES (1, null, 1, 'Info', '', '2019-08-20 22:31:29.956853', '2019-08-20 22:31:29.956853');
+INSERT INTO public.news_categories (id, parent_id, creator_id, name, description, created_at, updated_at) VALUES (2, null, 1, 'Events', null, '2019-08-20 22:32:14.327567', '2019-08-20 22:32:14.327567');
+INSERT INTO public.news_categories (id, parent_id, creator_id, name, description, created_at, updated_at) VALUES (3, null, 1, 'Shop', null, '2019-08-20 22:32:30.073472', '2019-08-20 22:32:30.073472');
+INSERT INTO public.news_categories (id, parent_id, creator_id, name, description, created_at, updated_at) VALUES (4, null, 1, 'Communauté', null, '2019-08-20 22:32:54.968461', '2019-08-20 22:32:54.968461');
+INSERT INTO public.news_categories (id, parent_id, creator_id, name, description, created_at, updated_at) VALUES (6, 1, 1, 'InfoTest2', null, '2019-08-20 22:34:48.330200', '2019-08-20 22:34:48.330200');
+INSERT INTO public.news_categories (id, parent_id, creator_id, name, description, created_at, updated_at) VALUES (5, 1, 1, 'InfoTest1', null, '2019-08-20 22:34:33.041002', '2019-08-20 22:34:33.041002');
+INSERT INTO public.news_categories (id, parent_id, creator_id, name, description, created_at, updated_at) VALUES (7, 5, 1, 'InfoTest1-A', null, '2019-08-20 22:35:25.793965', '2019-08-20 22:35:25.793965');
+INSERT INTO public.news_categories (id, parent_id, creator_id, name, description, created_at, updated_at) VALUES (8, 5, 1, 'InfoTest1-B', null, '2019-08-20 22:36:34.850817', '2019-08-20 22:36:34.850817');

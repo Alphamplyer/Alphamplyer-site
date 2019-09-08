@@ -1,0 +1,1 @@
+INSERT INTO public.product_types (id, parent_id, code, description, name) VALUES (2, null, 'TEST', 'Type TEST', 'Test');
