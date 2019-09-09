@@ -16,7 +16,7 @@ public class ResetDatabase {
         // Create MySql Connection
         Class.forName("org.postgresql.Driver");
         Connection con = DriverManager.getConnection(
-            "jdbc:postgresql://localhost:5432/alphamplyer-microservice-orders-test", "admin", "admin");
+            "jdbc:postgresql://localhost:5432/alphamplyer-microservice-users-test", "admin", "admin");
 
         try {
             // Initialize object for ScripRunner
