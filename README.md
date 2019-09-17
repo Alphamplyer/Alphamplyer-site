@@ -66,6 +66,11 @@ Later, I will surely try to protect microservices with a Gateway API. For that I
   - Cloud Security
   - Cloud OAuth2
 
+## Super user account for test :
+
+ID : Administrateur
+password : admin
+
 ## Information : Projet Progress
 
 I pass the project under Apache license so we can use this example, for the moment mostly in French.
