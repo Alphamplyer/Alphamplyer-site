@@ -63,7 +63,11 @@ Plus tard, je tenterai sûrement de protéger les microservices avec un API Gate
   - Cloud Security
   - Cloud OAuth2
 
+## Compte Super Utilisateur pour les tests :
+
+ID : Administrateur
+password : admin
 
 ## Information : Avancement du projet
 
-Je prévois la fin de la première version d'en une à deux semaine.
+Pour l'instant toutes les fonctionnalité ne sont pas terminé et la pluspart seront fini dans la version 2
